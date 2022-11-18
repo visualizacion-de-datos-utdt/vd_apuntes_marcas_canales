@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tipos de datos, marcas gráficas y canales de codificación visual</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="columns">
+        <div class="column col-12">
+          <br />
+          <p class="label">VISUALIZACIÓN DE DATOS | LTD - LED - UTDT</p>
+
+          <h2>Tipos de datos, marcas y canales de codificación visual</h2>
+
+          <p>
+            Una visualización representa datos mediante una colección de marcas gráficas, como
+            barras, líneas y símbolos de puntos. Los atributos de una marca, como su posición,
+            forma, tamaño o color, sirven como canales en los que podemos codificar valores de datos
+            subyacentes.
+          </p>
+          <img src="imgs/canvas.png" alt="" />
+          <p>
+            Con un marco básico de tipos de datos, marcas y canales de codificación, podemos crear
+            de manera concisa una amplia variedad de visualizaciones. En este cuaderno, exploramos
+            cada uno de estos elementos y mostramos cómo usarlos para crear gráficos estadísticos
+            personalizados.
+          </p>
+
+          <h4>Datos de desarrollo mundial</h4>
+          <p>
+            Visualizaremos datos globales de salud y población para países del mundo, registradas
+            durante los años 1955 a 2005. Los datos fueron recopilados por la Fundación Gapminder y
+            compartidos en la popular charla TED de Hans Rosling. (Si no has visto la charla, ¡te
+            animamos a que la veas!)
+          </p>
+          <p>Primero, carguemos el conjunto de datos con d3 en una lista de JavaScript.</p>
+          <pre><code class="language-js">
+vl.markPoint()
+  .data(data2000)
+  .encode(
+    vl.x().fieldQ('fertility')
+  )
+  .render()
+          </code></pre>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>year</th>
+                <th>country</th>
+                <th>cluster</th>
+                <th>pop</th>
+                <th>life_expect</th>
+                <th>fertility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1955</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>8891209</td>
+                <td>30.332</td>
+                <td>7.7</td>
+              </tr>
+              <tr>
+                <td>1960</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>9829450</td>
+                <td>31.997</td>
+                <td>7.7</td>
+              </tr>
+              <tr>
+                <td>1965</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>10997885</td>
+                <td>34.02</td>
+                <td>7.7</td>
+              </tr>
+              <tr>
+                <td>1970</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>12430623</td>
+                <td>36.088</td>
+                <td>7.7</td>
+              </tr>
+              <tr>
+                <td>1975</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>14132019</td>
+                <td>38.438</td>
+                <td>7.7</td>
+              </tr>
+              <tr>
+                <td>1980</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>15112149</td>
+                <td>39.854</td>
+                <td>7.8</td>
+              </tr>
+              <tr>
+                <td>1985</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>13796928</td>
+                <td>40.822</td>
+                <td>7.9</td>
+              </tr>
+              <tr>
+                <td>1990</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>14669339</td>
+                <td>41.674</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <td>1995</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>20881480</td>
+                <td>41.763</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>23898198</td>
+                <td>42.129</td>
+                <td>7.4792</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <iframe
+            src="chart_01/index.html"
+            width="640"
+            height="400"
+            title="Chart 01"
+            frameborder="0"
+          ></iframe>
+
+          <a
+            href="https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum"
+            >UW Interactive Data Lab. Data Types, Graphical Marks, and Visual Encoding Channels
+          </a>
+        </div>
+      </div>
+    </div>
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
