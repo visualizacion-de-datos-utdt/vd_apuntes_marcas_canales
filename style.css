@@ -1,5 +1,7 @@
 iframe {
   display: block;
+  min-width: 100%; 
+  border: none;
 }
 .container {
   max-width: 1280px;
