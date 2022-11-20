@@ -48,9 +48,16 @@
           </p>
           <p>
             Primero, carguemos el conjunto de datos
-            <a href="./data/data2000.csv">data2000.csv</a> con d3 que lo transforma en una lista de
-            objetos.
+            <a href="./data/data2000.csv">data2000.csv</a> con d3. El método <code>d3.csv</code> de
+            d3 lo transformará en una lista de objetos. El segundo parámetro (la función
+            <code>d3.autoType</code>) convertirá automáticamente los valores del conjunto de datos
+            al tipo correcto.
           </p>
+          <pre><code class="language-js">
+d3.csv("ruta_al_archivo/data2000.csv", d3.autoType).then((data) => {
+  console.log(data);
+});
+                        </code></pre>
 
           <table class="table">
             <thead>
@@ -149,13 +156,13 @@
           <!-- chart_01_x -->
           <iframe id="chart_01_x" src="chart_01_x/index.html"></iframe>
           <pre><code class="language-js">
-  vl.markPoint()
-    .data(data2000)
-    .encode(
-      vl.x().fieldQ('fertility')
-    )
-    .render()
-            </code></pre>
+/* chart_01_x */
+Plot.plot({
+  marks: [
+    Plot.dot(data, { x: "fertility" }),
+  ],
+});
+                    </code></pre>
 
           <!-- chart_02_y -->
           <iframe src="chart_02_y/index.html"></iframe>
