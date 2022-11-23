@@ -1,7 +1,7 @@
 // https://hypeauditor.com/top-tiktok-argentina/ 
 
 //TODO, hay que cambiarle las figuras
-d3.csv('../data/data2000.csv', d3.autoType)
+d3.csv('../../data/data2000.csv', d3.autoType)
 .then(data => {
   console.log(data)
 

@@ -1,5 +1,5 @@
 // https://hypeauditor.com/top-tiktok-argentina/ 
-d3.csv('../data/data2000.csv', d3.autoType)
+d3.csv('../../data/data2000.csv', d3.autoType)
 .then(data => {
   console.log(data)
 
@@ -11,9 +11,14 @@ d3.csv('../data/data2000.csv', d3.autoType)
     Plot.dot(data, {
       x: "fertility",
       y: "life_expect",
-      stroke:"#666af0",
-      r: "pop"
+      fill: "cluster",
+      fillOpacity: 0.5,
+      r: "pop",
+      sort: { x: "y"},
   })],
+  color: {
+    range: ["#a3c4f3", "#ffd670", "#ff9770", "#8eecf5", "#60d394", "#ffef9f" ],
+  },
   x:{
     domain: [0, d3.max(data, d => d.fertility)],
   },
