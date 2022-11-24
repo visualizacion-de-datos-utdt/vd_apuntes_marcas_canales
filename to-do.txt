@@ -1,0 +1,9 @@
+REVISAR
+
+- leyendas
+-chart_06_color_d
+    cambiarle las figuras
+- chart_06_tooltip_b
+    que se vean los circulos mas chiquitos por arriba del grande para que se pueda acceder al tooltip 
+    una vez arreglado tmb cambiar en chart_06_tooltip_c
+
