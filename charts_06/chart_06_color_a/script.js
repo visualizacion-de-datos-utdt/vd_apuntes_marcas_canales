@@ -7,6 +7,10 @@ d3.csv('../../data/data2000.csv', d3.autoType)
   grid: true,
   line: true,
   nice:true,
+  color: {
+    legend: "ramp",
+    range: ["#a3c4f3", "#ffd670", "#ff9770", "#8eecf5", "#60d394", "#ffef9f" ],
+  },
   marks: [
     Plot.dot(data, {
       x: "fertility",
@@ -14,9 +18,6 @@ d3.csv('../../data/data2000.csv', d3.autoType)
       stroke: "cluster",
       r: "pop"
   })],
-  color: {
-    range: ["#a3c4f3", "#ffd670", "#ff9770", "#8eecf5", "#60d394", "#ffef9f" ],
-  },
   x:{
     domain: [0, d3.max(data, d => d.fertility)],
   },

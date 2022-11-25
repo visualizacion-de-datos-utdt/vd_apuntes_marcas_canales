@@ -1,6 +1,12 @@
 // https://hypeauditor.com/top-tiktok-argentina/ 
 
 //TODO, hay que cambiarle las figuras
+let icons ={
+  0: "./images/circle.svg",
+  1: "./images/square.svg",
+  2: "./images/triangle.svg",
+
+}
 d3.csv('../../data/data2000.csv', d3.autoType)
 .then(data => {
   console.log(data)
@@ -17,8 +23,10 @@ d3.csv('../../data/data2000.csv', d3.autoType)
       fillOpacity: 0.5,
       r: "pop",
       sort: { x: "y"},
-  })],
+  })
+  ],
   color: {
+    legend: "ramp",
     range: ["#a3c4f3", "#ffd670", "#ff9770", "#8eecf5", "#60d394", "#ffef9f" ],
   },
   x:{

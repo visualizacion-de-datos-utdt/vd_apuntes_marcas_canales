@@ -9,7 +9,7 @@ d3.csv('../../data/data2000.csv', d3.autoType)
   line: true,
   nice:true,
   height:200,
-  width: 2000,
+  width: 1000,
   facet: {
     data: data,
     x: "cluster"
@@ -28,6 +28,7 @@ d3.csv('../../data/data2000.csv', d3.autoType)
   },
   x:{
     domain: [0, d3.max(data, d => d.fertility)],
+    ticks: d3.max(data, d => d.fertility)/2,
   },
   y: {
     tickFormat: d3.format(".0f"),

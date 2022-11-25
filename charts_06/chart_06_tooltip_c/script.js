@@ -18,6 +18,7 @@ d3.csv('../../data/data2000.csv', d3.autoType)
       title: (d) => `country: ${d.country} \n fertility: ${d.fertility} \n life_expect: ${d.life_expect} `,
   })],
   color: {
+    legend: "ramp",
     range: ["#a3c4f3", "#ffd670", "#ff9770", "#8eecf5", "#60d394", "#ffef9f" ],
   },
   x:{
