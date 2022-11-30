@@ -45,19 +45,22 @@
             durante los años 1955 a 2005. Los datos fueron recopilados por la Fundación Gapminder y
             compartidos en la popular charla TED de Hans Rosling. (Si no has visto la charla, ¡te
             animamos a que la veas!)
-          </p>
-          <p>
+            <br /><br />
             Primero, carguemos el conjunto de datos
-            <a href="./data/data2000.csv">data2000.csv</a> con d3. El método <code>d3.csv</code> de
-            d3 lo transformará en una lista de objetos. El segundo parámetro (la función
+            <a href="./data/data.csv">data.csv</a> con d3. El método <code>d3.csv</code> de d3 lo
+            transformará en una lista de objetos. El segundo parámetro (la función
             <code>d3.autoType</code>) convertirá automáticamente los valores del conjunto de datos
             al tipo correcto.
           </p>
           <pre><code class="language-js">
-            d3.csv("ruta_al_archivo/data2000.csv", d3.autoType).then((data) => {
-              console.log(data);
-            });
+d3.csv("ruta_al_archivo/data.csv", d3.autoType).then((data) => {
+  console.table(data);
+});
           </code></pre>
+          <p>
+            El tamaño de los datos es de 693 filas por 6 columnas. Veamos el contenido de las
+            primeras 10 filas:
+          </p>
 
           <table class="table">
             <thead>
@@ -153,6 +156,198 @@
               </tr>
             </tbody>
           </table>
+          <br /><br />
+          <p>
+            Para cada país (<code>country</code>) y año (<code>year</code>) (en intervalos de 5),
+            tenemos medidas de fertilidad en términos del número de hijos por mujer
+            (<code>fertility</code>), esperanza de vida en años ( <code>life_expect</code> ) y
+            población total (<code>pop</code>). <br /><br />
+            También vemos un campo de <code>cluster</code> con un código entero. ¿Qué podría
+            representar esto? ¡Intentaremos resolver este misterio mientras visualizamos los datos!
+            <br /><br />
+            También vamos a crear una matriz de datos más pequeña, filtrada a valores solo para el
+            año 2000 <a href="./data/data2000.csv">data2000.csv</a>
+          </p>
+          <!-- Tabla 2000 -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>year</th>
+                <th>country</th>
+                <th>cluster</th>
+                <th>pop</th>
+                <th>life_expect</th>
+                <th>fertility</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2000</td>
+                <td>"Afghanistan"</td>
+                <td>0</td>
+                <td>23898198</td>
+                <td>42.129</td>
+                <td>7.4792</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Argentina"</td>
+                <td>3</td>
+                <td>37497728</td>
+                <td>74.34</td>
+                <td>2.35</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Aruba"</td>
+                <td>3</td>
+                <td>69539</td>
+                <td>73.451</td>
+                <td>2.124</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Australia"</td>
+                <td>4</td>
+                <td>19164620</td>
+                <td>80.37</td>
+                <td>1.756</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Austria"</td>
+                <td>1</td>
+                <td>8113413</td>
+                <td>78.98</td>
+                <td>1.382</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Bahamas"</td>
+                <td>3</td>
+                <td>290075</td>
+                <td>71.068</td>
+                <td>2.1111</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Bangladesh"</td>
+                <td>0</td>
+                <td>130406594</td>
+                <td>62.013</td>
+                <td>3.224</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Barbados"</td>
+                <td>3</td>
+                <td>273483</td>
+                <td>75.97</td>
+                <td>1.5</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Belgium"</td>
+                <td>1</td>
+                <td>10263618</td>
+                <td>78.32</td>
+                <td>1.638</td>
+              </tr>
+              <tr>
+                <td>2000</td>
+                <td>"Bolivia"</td>
+                <td>3</td>
+                <td>8152620</td>
+                <td>63.883</td>
+                <td>3.9585</td>
+              </tr>
+            </tbody>
+          </table>
+          <br /><br />
+
+          <!-- Data types -->
+          <h4>Tipos de datos</h4>
+          <p>
+            El primer elemento en una visualización efectiva son los datos de entrada. Los valores
+            de los datos pueden representar diferentes formas de medición. ¿Qué tipo de
+            comparaciones admiten esas medidas? ¿Y qué tipos de codificaciones visuales respaldan
+            esas comparaciones? Comenzaremos observando los tipos de datos básicos. Estos tipos de
+            datos determinan los tipos de comparaciones que podemos hacer y, por lo tanto, guían
+            nuestras decisiones de diseño de visualización.
+          </p>
+          <h5>Categóricos</h5>
+          <p>
+            Los datos categóricos, también llamados datos nominales, consisten en nombres de
+            categorías. Con datos categóricos podemos comparar la igualdad de valores: ¿el valor A
+            es igual o diferente al valor B? (A == B), es decir, sentencias como "A es igual a B" o
+            "A no es igual a B". En los datos de ejemplo, el campo <code>country</code> es nominal.
+            Al visualizar datos nominales, debemos percibir fácilmente si los valores son iguales o
+            diferentes: la posición, el tono del color (azul, rojo, verde, etc.) y la elección de
+            distintas formas geométricas son opciones posibles. Por el contrario, el uso del tamaño
+            para codificar datos nominales podría inducirnos a error, sugiriendo diferencias de
+            magnitud entre valores que no existen.
+          </p>
+
+          <h5>Ordinales</h5>
+          <p>
+            Los datos ordinales consisten en valores que tienen un orden específico. En los datos
+            ordinales podemos comparar el orden los valores: ¿el valor A viene antes o después del
+            valor B? (A < B), expresiones como "A es menor que B" o "A es mayor que B". En los datos
+            de ejemplo, podemos tratar el campo <code>year</code> como ordinal. Al visualizar datos
+            ordinales, debemos percibir una sensación de orden. La posición, el tamaño o el valor de
+            brillo del color pueden ser apropiados, mientras que el tono del color (que no está
+            ordenado perceptivamente) sería menos apropiado.
+          </p>
+          <h1>TO DO</h1>
+
+          <h5>Cuantitativos</h5>
+          <p>
+            Con datos cuantitativos podemos medir diferencias numéricas entre valores. Existen
+            múltiples subtipos de datos cuantitativos:
+            <br /><br />
+            Para datos de <i>intervalo</i> podemos medir la distancia (intervalo) entre puntos:
+            ¿cuál es la distancia del valor A al valor B? (A - B), declaraciones de apoyo como "A
+            está a 12 unidades de distancia de B". <br /><br />
+            Para los datos de relación, el punto cero es significativo, por lo que también podemos
+            medir proporciones o factores de escala: ¿qué proporción es el valor A del valor B? (A /
+            B), declaraciones de apoyo como "A es el 10% de B" o "B es 7 veces más grande que A".
+            <br /><br />
+            En el conjunto de datos anterior, el año es un campo de intervalo cuantitativo (el valor
+            del año "cero" es subjetivo), mientras que la fertilidad y la expectativa de vida son
+            campos de relación cuantitativa (el cero es significativo para calcular proporciones).
+            Vega-Lite representa datos cuantitativos, pero no hace una distinción entre los tipos de
+            intervalo y relación. Los valores cuantitativos se pueden visualizar mediante el valor
+            de posición, tamaño o color, entre otros canales. Un eje con una línea de base cero es
+            esencial para las comparaciones proporcionales de valores de relación, pero se puede
+            omitir con seguridad para las comparaciones de intervalos.
+          </p>
+
+          <h5>Temporales (T)</h5>
+          <p>
+            Los valores temporales miden puntos de tiempo o intervalos. Este tipo es un caso
+            especial de valores cuantitativos (marcas de tiempo) con una rica semántica y
+            convenciones (es decir, el calendario gregoriano). Los valores temporales de ejemplo
+            incluyen cadenas de fecha como "2019-01-04" y "04 de enero de 2019", así como fechas y
+            horas estandarizadas como el formato de fecha y hora ISO: "2019-01-04T17:50:35.643Z" .
+            No hay valores temporales en nuestro conjunto de datos de desarrollo global anterior, ya
+            que el campo del año está codificado como un número entero. El tipo temporal en
+            Vega-Lite admite el razonamiento sobre unidades de tiempo (año, mes, día, hora, etc.) y
+            proporciona métodos para solicitar intervalos de tiempo específicos. Para obtener más
+            detalles sobre los datos temporales en Vega-Lite, consulte la documentación de TimeUnit.
+          </p>
+
+          <h5>Resumen</h5>
+          <p>
+            Estos tipos de datos no se excluyen mutuamente, sino que forman una jerarquía: los datos
+            ordinales admiten comparaciones nominales (igualdad), mientras que los datos
+            cuantitativos admiten comparaciones ordinales (orden de rango). Además, estos tipos de
+            datos no proporcionan una categorización fija. Por ejemplo, el hecho de que un campo de
+            datos se represente con un número no significa que debamos tratarlo como un tipo
+            cuantitativo. Podríamos interpretar un conjunto de edades (10 años, 20 años, etc.) como
+            nominales (menores o mayores), ordinales (agrupados por años) o cuantitativos (calcular
+            la edad promedio). Ahora examinemos cómo visualizar estos tipos de datos usando canales
+            de codificación.
+          </p>
           <!-- chart_01_x -->
           <iframe id="chart_01_x" src="chart_01_x/index.html"></iframe>
           <pre><code class="language-js">
