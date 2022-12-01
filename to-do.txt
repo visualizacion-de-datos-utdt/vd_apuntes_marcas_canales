@@ -1,9 +1,11 @@
 REVISAR
 
 - leyendas
--chart_06_color_d
+- chart_06_color_d --- NO
     cambiarle las figuras
-- chart_06_tooltip_b
+- chart_06_tooltip_b -- NO
     que se vean los circulos mas chiquitos por arriba del grande para que se pueda acceder al tooltip 
     una vez arreglado tmb cambiar en chart_06_tooltip_c
+- chart_09_point_mark 
+    no se puede hacer porque pasa lo mismo que con el chart_06_color_d
 
