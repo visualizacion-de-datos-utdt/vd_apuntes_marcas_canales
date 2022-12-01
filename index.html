@@ -53,9 +53,9 @@
             al tipo correcto.
           </p>
           <pre><code class="language-js">
-d3.csv("ruta_al_archivo/data.csv", d3.autoType).then((data) => {
-  console.table(data);
-});
+  d3.csv("ruta_al_archivo/data.csv", d3.autoType).then((data) => {
+    console.table(data);
+  });
           </code></pre>
           <p>
             El tamaño de los datos es de 693 filas por 6 columnas. Veamos el contenido de las
@@ -266,74 +266,77 @@ d3.csv("ruta_al_archivo/data.csv", d3.autoType).then((data) => {
           <br /><br />
 
           <!-- Data types -->
-          <h4>Tipos de datos</h4>
+          <h3>Tipos de datos</h3>
           <p>
-            El primer elemento en una visualización efectiva son los datos de entrada. Los valores
-            de los datos pueden representar diferentes formas de medición. ¿Qué tipo de
-            comparaciones admiten esas medidas? ¿Y qué tipos de codificaciones visuales respaldan
-            esas comparaciones? Comenzaremos observando los tipos de datos básicos. Estos tipos de
-            datos determinan los tipos de comparaciones que podemos hacer y, por lo tanto, guían
-            nuestras decisiones de diseño de visualización.
+            El elemento fundamental de una visualización es la data de entrada. Los valores de los
+            datos pueden representar diferentes formas de medición. ¿Qué tipo de comparaciones
+            admiten esas medidas? ¿Y qué tipos de codificaciones visuales respaldan esas
+            comparaciones? Comenzaremos observando los tipos de datos básicos. Estos tipos de datos
+            determinan los tipos de comparaciones que podemos hacer y, por lo tanto, guían nuestras
+            decisiones de diseño de visualización.
           </p>
           <h5>Categóricos</h5>
           <p>
-            Los datos categóricos, también llamados datos nominales, consisten en nombres de
-            categorías. Con datos categóricos podemos comparar la igualdad de valores: ¿el valor A
-            es igual o diferente al valor B? (A == B), es decir, sentencias como "A es igual a B" o
-            "A no es igual a B". En los datos de ejemplo, el campo <code>country</code> es nominal.
-            Al visualizar datos nominales, debemos percibir fácilmente si los valores son iguales o
-            diferentes: la posición, el tono del color (azul, rojo, verde, etc.) y la elección de
-            distintas formas geométricas son opciones posibles. Por el contrario, el uso del tamaño
-            para codificar datos nominales podría inducirnos a error, sugiriendo diferencias de
-            magnitud entre valores que no existen.
+            Los datos <span class="label">categóricos</span>, también llamados datos
+            <span class="label">nominales</span>, consisten en nombres de categorías. Con datos
+            categóricos podemos comparar la igualdad de valores: ¿el valor A es igual o diferente al
+            valor B? (A == B), podemos declarar "A es igual a B" o "A no es igual a B". En los datos
+            de ejemplo, el campo <code>country</code> es nominal. Al visualizar datos nominales,
+            debemos percibir fácilmente si los valores son iguales o diferentes: la posición, el
+            tono del color (azul, rojo, verde, etc.) y la elección de distintas formas geométricas
+            son opciones posibles. Por el contrario, el uso del tamaño para codificar datos
+            nominales podría inducirnos a error, sugiriendo diferencias de magnitud entre valores
+            que no existen.
           </p>
 
           <h5>Ordinales</h5>
           <p>
-            Los datos ordinales consisten en valores que tienen un orden específico. En los datos
-            ordinales podemos comparar el orden los valores: ¿el valor A viene antes o después del
-            valor B? (A < B), expresiones como "A es menor que B" o "A es mayor que B". En los datos
-            de ejemplo, podemos tratar el campo <code>year</code> como ordinal. Al visualizar datos
-            ordinales, debemos percibir una sensación de orden. La posición, el tamaño o el valor de
-            brillo del color pueden ser apropiados, mientras que el tono del color (que no está
-            ordenado perceptivamente) sería menos apropiado.
+            Los datos <span class="label">ordinales</span> consisten en valores que tienen un orden
+            específico. En este tipo de datos podemos comparar el orden de los valores: ¿el valor A
+            viene antes o después del valor B? (A < B), podemos preguntar si "A es menor que B" o "A
+            es mayor que B". En los datos de ejemplo, podemos tratar el campo <code>year</code> como
+            ordinal. Al visualizar datos ordinales, debemos percibir una sensación de orden. Son
+            apropiados la posición, el tamaño o el valor de brillo del color, mientras que el tono
+            del color (que no está ordenado perceptivamente) sería menos adecuado.
           </p>
-          <h1>TO DO</h1>
 
           <h5>Cuantitativos</h5>
           <p>
-            Con datos cuantitativos podemos medir diferencias numéricas entre valores. Existen
-            múltiples subtipos de datos cuantitativos:
-            <br /><br />
-            Para datos de <i>intervalo</i> podemos medir la distancia (intervalo) entre puntos:
-            ¿cuál es la distancia del valor A al valor B? (A - B), declaraciones de apoyo como "A
-            está a 12 unidades de distancia de B". <br /><br />
-            Para los datos de relación, el punto cero es significativo, por lo que también podemos
-            medir proporciones o factores de escala: ¿qué proporción es el valor A del valor B? (A /
-            B), declaraciones de apoyo como "A es el 10% de B" o "B es 7 veces más grande que A".
-            <br /><br />
-            En el conjunto de datos anterior, el año es un campo de intervalo cuantitativo (el valor
-            del año "cero" es subjetivo), mientras que la fertilidad y la expectativa de vida son
-            campos de relación cuantitativa (el cero es significativo para calcular proporciones).
-            Vega-Lite representa datos cuantitativos, pero no hace una distinción entre los tipos de
-            intervalo y relación. Los valores cuantitativos se pueden visualizar mediante el valor
-            de posición, tamaño o color, entre otros canales. Un eje con una línea de base cero es
-            esencial para las comparaciones proporcionales de valores de relación, pero se puede
-            omitir con seguridad para las comparaciones de intervalos.
+            Con datos <span class="label">cuantitativos</span> podemos medir diferencias numéricas
+            entre valores. Existen múltiples subtipos de datos cuantitativos: <br /><br />
+            Para datos de <span class="label">intervalo</span> podemos medir la distancia
+            (intervalo) entre puntos: ¿cuál es la distancia del valor A al valor B? (A - B), podemos
+            enunciar "A está a 12 unidades de distancia de B". <br /><br />
+            Para los datos de <span class="label">relación</span>, el punto cero es significativo,
+            por lo que también podemos medir proporciones o factores de escala: ¿qué proporción hay
+            entre el valor A y el valor B? (A / B), podemos decir "A es el 10% de B" o "B es 7 veces
+            más grande que A". <br /><br />
+            En el conjunto de datos de ejemplo, el campo <code>year</code> es un intervalo
+            cuantitativo (el valor del año "cero" es subjetivo), mientras que
+            <code>fertility</code> y <code>life_expect</code> son campos de relación cuantitativa
+            (el cero es significativo para calcular proporciones). <br /><br />
+            Los valores cuantitativos se pueden visualizar mediante posición, tamaño o color (brillo
+            u opacidad), entre otros canales. Un eje con una línea de base cero es esencial para las
+            comparaciones proporcionales de valores de relación, pero se puede omitir para las
+            comparaciones de intervalos.
           </p>
 
-          <h5>Temporales (T)</h5>
+          <h5>Temporales</h5>
           <p>
-            Los valores temporales miden puntos de tiempo o intervalos. Este tipo es un caso
-            especial de valores cuantitativos (marcas de tiempo) con una rica semántica y
-            convenciones (es decir, el calendario gregoriano). Los valores temporales de ejemplo
-            incluyen cadenas de fecha como "2019-01-04" y "04 de enero de 2019", así como fechas y
-            horas estandarizadas como el formato de fecha y hora ISO: "2019-01-04T17:50:35.643Z" .
-            No hay valores temporales en nuestro conjunto de datos de desarrollo global anterior, ya
-            que el campo del año está codificado como un número entero. El tipo temporal en
-            Vega-Lite admite el razonamiento sobre unidades de tiempo (año, mes, día, hora, etc.) y
-            proporciona métodos para solicitar intervalos de tiempo específicos. Para obtener más
-            detalles sobre los datos temporales en Vega-Lite, consulte la documentación de TimeUnit.
+            Los valores <span class="label">temporales</span> indican puntos o intervalos de tiempo.
+            Este tipo es un caso especial de valores cuantitativos (marcas de fecha y hora) con una
+            rica historia de convenciones (<a
+              href="https://es.wikipedia.org/wiki/Calendario_gregoriano"
+              >el calendario gregoriano</a
+            >). <br /><br />
+            Los valores temporales pueden incluir textos como "2019-01-04" o "04 de enero de 2019",
+            así como fechas y horas estandarizadas como el formato de fecha y hora ISO:
+            "2019-01-04T17:50:35.643Z" . No hay valores temporales en nuestro conjunto de datos ya
+            que el campo <code>year</code> está codificado como un número entero. <br /><br />
+            El tipo temporal en Vega-Lite admite el razonamiento sobre unidades de tiempo (año, mes,
+            día, hora, etc.) y proporciona métodos para solicitar intervalos de tiempo específicos.
+            Para obtener más detalles sobre los datos temporales en Vega-Lite, consulte la
+            documentación de TimeUnit.
           </p>
 
           <h5>Resumen</h5>
@@ -346,17 +349,52 @@ d3.csv("ruta_al_archivo/data.csv", d3.autoType).then((data) => {
             cuantitativo. Podríamos interpretar un conjunto de edades (10 años, 20 años, etc.) como
             nominales (menores o mayores), ordinales (agrupados por años) o cuantitativos (calcular
             la edad promedio). Ahora examinemos cómo visualizar estos tipos de datos usando canales
-            de codificación.
+            de codificación visual.
           </p>
+          <hr />
+          <h1>To do: convert Vega to Plot</h1>
+          <h3>Canales de codificación visual</h3>
+
+          <ul>
+            <li><code>x</code>: Posición horizontal (eje x) de la marca.</li>
+            <li><code>y</code>: Posición vertical (eje y) de la marca.</li>
+            <li>
+              <code>size</code>: Tamaño de la marca. Puede corresponder a área o longitud, según el
+              tipo de marca.
+            </li>
+            <li>
+              <code>color</code>: color de marca, especificado como
+              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value"
+                >color CSS legal</a
+              >.
+            </li>
+            <li>
+              <code>opacity</code>: Marque la opacidad, que va de 0 (totalmente transparente) a 1
+              (totalmente opaco).
+            </li>
+            <li>
+              <code>shape</code>: forma de símbolo de trazado para marcas de <code>punto</code>.
+            </li>
+            <li>
+              <code>información sobre herramientas</code>: texto de información sobre herramientas
+              que se muestra al pasar el mouse sobre la marca.
+            </li>
+            <li>
+              <code>order</code>: Marca el orden, determina el orden de puntos de línea/área y el
+              orden de dibujo.
+            </li>
+            <li><code>column</code>: divide los datos en subparcelas alineadas horizontalmente.</li>
+            <li><code>fila</code>: divida los datos en subparcelas alineadas verticalmente.</li>
+          </ul>
           <!-- chart_01_x -->
           <iframe id="chart_01_x" src="chart_01_x/index.html"></iframe>
           <pre><code class="language-js">
-            /* chart_01_x */
-            Plot.plot({
-              marks: [
-                Plot.dot(data, { x: "fertility" }),
-              ],
-            });
+  /* chart_01_x */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, { x: "fertility" }),
+    ],
+  });
           </code></pre>
 
           <!-- chart_02_y -->
