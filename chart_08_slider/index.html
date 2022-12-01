@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chart 08 - slice </title>
+  </head>
+  <body>
+    <!-- <h1>Spotify: Los más escuchados 2022</h1> -->
+    <div style="display:flex;" >
+      <p>Seleccione año: </p>
+      <input type="range" min="1955" max="2000" step="5" value="1955" id="input">
+      <p id="value-input"></p>
+    </div>
+    <div id="chart"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.js"></script>
+    <script type="module" src="script.js"></script>
+    
+  </body>
+</html>
