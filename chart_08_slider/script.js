@@ -9,7 +9,7 @@ selectElement.addEventListener('change', (event) => {
   createChart(yearSelected)
 });
 
-d3.csv('../../data/data.csv', d3.autoType).then(function (dataChart) {
+d3.csv('data.csv', d3.autoType).then(function (dataChart) {
   data = dataChart.sort((a, b) => d3.descending(a.pop, b.pop));
   changeValueInput(selectElement.value)
   createChart(selectElement.value)

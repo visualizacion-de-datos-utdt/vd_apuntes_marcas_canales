@@ -1,32 +1,32 @@
 d3.csv("data2000.csv", d3.autoType).then((data) => {
-  createChart(data)
-});
+  console.log(data);
 
-function createChart(data){
   let chart = Plot.plot({
-    height:200,
+    grid: true,
     line: true,
     nice: true,
+    color: {
+      legend: "ramp",
+      range: ["#a3c4f3", "#ffd670", "#ff9770", "#8eecf5", "#60d394", "#ffef9f"],
+    },
     marks: [
       Plot.dot(data, {
         x: "fertility",
-        y: "cluster",
-        fill: "#666af0",
-        fillOpacity: 0.6,
-        r: 7,
+        y: "life_expect",
+        stroke: "cluster",
+        r: "pop",
       }),
     ],
     x: {
       domain: [0, d3.max(data, (d) => d.fertility)],
-      grid: true,
     },
     y: {
-      reverse: true,
       tickFormat: d3.format(".0f"),
-      domain: [0, d3.max(data, (d) => d.cluster)+0.5],
-      ticks: 5,
-    }
+      domain: [0, d3.max(data, (d) => d.life_expect)],
+    },
+    r: {
+      range: [0, 18],
+    },
   });
   d3.select("#chart").append(() => chart);
-};
-  
+});
