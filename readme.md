@@ -1,10 +1,11 @@
 #### Visualización de Datos | LTD - LED - UTDT
 
-# Apuntes Marcas y Canales
+# Apuntes Marcas y Canales\*
 
-## Traducción al español y migración a Plot.js del artículo:
+### \* Traducción al castellano y migración a Plot.js del artículo:
 
-[Jeffrey Heer. _Data Types, Graphical Marks, and Visual Encoding Channels_, UW Interactive Data Lab](https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum)
+- [Jeffrey Heer. _Data Types, Graphical Marks, and Visual Encoding Channels_, UW Interactive Data Lab](https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum)
+- [Plot: Marks and Channels](https://observablehq.com/@observablehq/plot-marks?collection=@observablehq/plot)
 
 ## Visualización
 

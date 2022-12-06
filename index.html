@@ -352,39 +352,37 @@
             de codificación visual.
           </p>
           <hr />
-          <h1>To do: convert Vega to Plot</h1>
+          <!-- <h1>To do: convert Vega to Plot</h1> -->
           <h3>Canales de codificación visual</h3>
+          <p>
+            Para visualizar datos utilizamos <span class="label">marcas</span>: formas geométricas
+            tales como barras, puntos y líneas. En Plot, en el array <code>marks</code> definimos la
+            marca a utlizar (podemos usar más de una). <br /><br />
+            Luego de definir la marca, vinculamos columnas de datos a las propiedades visuales de
+            las marcas (el tipo de marca determina que canales se pueden utilizar). Estas
+            propiedades visuales codifican datos abstractos y las llamamos
+            <span class="label">canales</span>. Por ejemplo, podemos codificar la columna de
+            fertilidad (<code>fertility</code>) con la posición x de la marca punto (dot)). Los
+            canales más frecuentes son:
+          </p>
 
           <ul>
             <li><code>x</code>: Posición horizontal (eje x) de la marca.</li>
             <li><code>y</code>: Posición vertical (eje y) de la marca.</li>
             <li>
-              <code>size</code>: Tamaño de la marca. Puede corresponder a área o longitud, según el
-              tipo de marca.
+              <code>fill</code>: Se puede especificar como un canal para codificar datos abstractos
+              como color (especialmente para datos categóricos).
             </li>
             <li>
-              <code>color</code>: color de marca, especificado como
-              <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value"
-                >color CSS legal</a
-              >.
+              <code>fillOpacity</code>: La opacidad, que va de 0 (totalmente transparente) a 1
+              (totalmente opaco) se vincula generalmente a datos cuantitativos.
             </li>
+            <li><code>curve</code>: tipo de curva para marcas de línea.</li>
             <li>
-              <code>opacity</code>: Marque la opacidad, que va de 0 (totalmente transparente) a 1
-              (totalmente opaco).
+              <code>textAnchor</code>, <code>fontFamily</code>, <code>fontSize</code>,
+              <code>fontStyle</code>, <code>fontVariant</code>, <code>fontWeight</code>: son
+              atributos SVG (canales) vinculados a la marca textual (<code>text</code>).
             </li>
-            <li>
-              <code>shape</code>: forma de símbolo de trazado para marcas de <code>punto</code>.
-            </li>
-            <li>
-              <code>información sobre herramientas</code>: texto de información sobre herramientas
-              que se muestra al pasar el mouse sobre la marca.
-            </li>
-            <li>
-              <code>order</code>: Marca el orden, determina el orden de puntos de línea/área y el
-              orden de dibujo.
-            </li>
-            <li><code>column</code>: divide los datos en subparcelas alineadas horizontalmente.</li>
-            <li><code>fila</code>: divida los datos en subparcelas alineadas verticalmente.</li>
           </ul>
           <!-- chart_01_x -->
           <iframe id="chart_01_x" src="chart_01_x/index.html"></iframe>
