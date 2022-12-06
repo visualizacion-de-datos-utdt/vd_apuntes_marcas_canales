@@ -1,5 +1,4 @@
-// https://hypeauditor.com/top-tiktok-argentina/
-d3.csv("../data/data2000.csv", d3.autoType).then((data) => {
+d3.csv("data2000.csv", d3.autoType).then((data) => {
   console.log(data);
 
   let chart = Plot.plot({
