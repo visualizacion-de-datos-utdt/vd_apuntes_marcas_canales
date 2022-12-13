@@ -1,8 +1,6 @@
 import addTooltips from "./addTooltips.js";
 let chart;
 d3.csv("data2000.csv", d3.autoType).then((data) => {
-  console.log(data);
-
   chart = Plot.plot({
     grid: true,
     line: true,
