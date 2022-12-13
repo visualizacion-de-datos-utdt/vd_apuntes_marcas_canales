@@ -361,7 +361,6 @@
             de codificación visual.
           </p>
           <hr />
-          <!-- <h1>To do: convert Vega to Plot</h1> -->
           <h3>Canales de codificación visual</h3>
           <p>
             Para visualizar datos utilizamos <span class="label">marcas</span>: formas geométricas
@@ -396,10 +395,10 @@
           <!-- chart_01_x -->
           <h4>x</h4>
           <p>
-            El canal de codificación x establece la posición horizontal de una marca: en este caso
-            la coordenada x de la marca punto (<code>dot</code>). Además, las opciones
-            predeterminadas de la leyenda así como las del eje las realiza automáticamente Plot. En
-            el gráfico a continuación, vinculamos la columna <code>fertility</code> (datos
+            El canal de codificación <b class="label">x</b> establece la posición horizontal de una
+            marca: en este caso la coordenada x de la marca punto (<code>dot</code>). Además, las
+            opciones predeterminadas de la leyenda así como las del eje las realiza automáticamente
+            Plot. En el gráfico a continuación, vinculamos la columna <code>fertility</code> (datos
             cuantitativos) que da como resultado una escala lineal continua en el eje x:
           </p>
           <iframe id="chart_01_x" src="chart_01_x/index.html"></iframe>
@@ -415,11 +414,12 @@
           <!-- chart_02_y -->
           <h4>y</h4>
           <p>
-            El canal de codificación y establece la posición vertical de una marca (coordenada y).
-            Aquí hemos agregado el campo de <code>cluster</code> campo de tipo ordinal. En este caso
-            para que Plot no interprete los valores (0, 1, 2,...) como cuantitativos declaramos
-            explícitamente el tipo como de punto o banda <code>type: "point"</code>. El resultado es
-            un eje vertical con valores discretos discretos.
+            El canal de codificación <b class="label">y</b> establece la posición vertical de una
+            marca (coordenada y). Aquí hemos agregado el campo de tipo ordinal <code>cluster</code>.
+            En este caso para que Plot no interprete los valores como cuantitativos (ya que son
+            numéricos 0, 1, 2, ...) declaramos explícitamente el tipo como categórico. En el Plot lo
+            definimos como de punto o banda <code>type: "point"</code> o <code>type: "band"</code>.
+            El resultado es un eje vertical con valores discretos discretos.
           </p>
           <iframe src="chart_02_y/index.html"></iframe>
           <pre><code class="language-js">
@@ -434,11 +434,74 @@
 </code></pre>
 
           <!-- chart_03_x_y -->
+          <p>
+            ¿Qué sucede con el gráfico si al eje vertical vinculamos un campo cuantitativo?
+            <br /><br />
+            Si en lugar de <code>cluster</code> añadimos el campo <code>life_expect</code>, el
+            resultado es un diagrama de dispersión. Eliminamos <code>type: "point"</code> ya que el
+            campo es numérico y Plot interpreta que es cuantitativo:
+            <!-- con escalas lineales para ambos ejes: -->
+          </p>
           <iframe src="chart_03_x_y/index.html"></iframe>
-          <!-- chart_04_escala -->
-          <iframe src="chart_04_escala/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_03_x_y */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, { x: "fertility", y: "life_expect" }),
+    ],
+  });       
+
+</code></pre>
+          <!-- chart_03_x_y -->
+          <p>
+            Si queremos que las escalas incluyan el cero una de las maneras es indicarlo en los ejes
+            con
+            <code>zero: true</code>. En muchas situaciones es útil la extensión de los valores de
+            las escalas con líneas horizontales para el eje vertical y verticales para el eje
+            horizontal, en Plot podemos declarar la propiedad <code>grid: true</code> y
+            <code>line: true</code> para reforzar las líneas de origen del gráfico. En el caso que
+            el dominio (tanto en x como en y) no termine en un número entero o más legible podemos
+            extenderlo con <code>nice: true</code>.
+          </p>
+
+          <iframe src="chart_03_x_y_grid/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_03_x_y_grid */
+  Plot.plot({
+    marks: [Plot.dot(data, { x: "fertility", y: "life_expect" })],
+    x: { grid: true, line: true, zero: true, nice: true, },
+    y: { grid: true, line: true, zero: true, nice: true, }
+  });       
+
+</code></pre>
+
+          <h4>Tamaño</h4>
+          <p>
+            Podemos establecer el tamaño de una marca como canal para codificar valores. El
+            significado del canal puede variar según el tipo de marca. Para las marcas de puntos
+            (<code>dot</code>), el canal radio <code>r</code> hace que el área de los puntos sea
+            proporcional al valor cuantitativo asociado. Se puede ajustar el tamaño del punto según
+            sea necesario especificando explícitamente un rango con un array. Ej:
+            <code>range: [3,15]</code> <br /><br />
+            Enriquecemos nuestro gráfico de dispersión codificando la población (<code>pop</code>)
+            en el canal de radio.
+          </p>
+
           <!-- chart_05_size_a -->
           <iframe src="chart_05_size_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_05_size_a */
+  Plot.plot({
+    marks: [Plot.dot(data, { x: "fertility", y: "life_expect", r: "pop" })],
+    nice: true,
+    line: true,
+    grid: true,
+    zero: true,
+  })       
+          </code></pre>
+
+          <h1>To do</h1>
+
           <!-- chart_05_size_b -->
           <iframe src="chart_05_size_b/index.html"></iframe>
           <!-- chart_06_color_a -->
