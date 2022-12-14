@@ -5,29 +5,28 @@ d3.csv("data.csv", d3.autoType).then((data) => {
 
 function createChart(data){
   let chart = Plot.plot({
-    height:500,
-    width:400,
+    height:400,
+    width:600,
     marginLeft:60,
     marginBottom:50,
     line:true,
-    color: {
-      legend: true
-    },
+    nice:true,
     marks: [
-      Plot.areaY(data, {
-        x: "year", 
-        y: "pop", 
-        fill: "country"
+      Plot.areaY(data, { 
+        x: "year",
+        y1: d => d3.min( data.filter( dat => dat.year == d.year), (d) => d.fertility),
+        y2: d => d3.max( data.filter( dat => dat.year == d.year), (d) => d.fertility), 
+        fill:"#0077b6"
       })
     ],
     x:{
-      domain:[d3.min(data, (d) => d.year)-1,d3.max(data, (d) => d.year)+1],
       ticks:11,
       tickRotate:-90,
     },
     y:{
-      ticks:7,
+      domain:[ 0, d3.max(data, (d) => d.fertility)],
       grid:true,
+      label:"Min of fertility, Max of fertility"
     },
   });
   d3.select("#chart").append(() => chart);

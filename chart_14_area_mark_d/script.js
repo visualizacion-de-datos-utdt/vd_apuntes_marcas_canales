@@ -15,6 +15,7 @@ function createChart(data){
     },
     marks: [
       Plot.areaY(data, {
+        offset: "silhouette",
         x: "year", 
         y: "pop", 
         fill: "country"
