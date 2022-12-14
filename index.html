@@ -612,8 +612,8 @@
           <!-- chart_06_symbol -->
           <h3>Forma</h3>
           <p>
-            El canal de codificación de formas establece una forma geométrica distinta para cada
-            dato categórico, en este caso lo usamos para codificar los clusters:
+            El canal de codificación de formas (<code>symbol</code>) establece una forma geométrica
+            distinta para cada dato categórico, en este caso lo usamos para codificar los clusters:
             <code>symbol: "cluster"</code>
             marcas de puntos. A diferencia de los otros canales que hemos visto hasta ahora, el
             canal de forma solo puede ser utilizado con la marca dot. El canal de codificación de
@@ -648,15 +648,146 @@
 
 </code></pre>
 
-          <h1>To do</h1>
-          <h3>Tooltips y ordenamiento</h3>
-
+          <h3><em>Tooltips</em> y ordenamiento</h3>
+          <p>
+            Llegados a este punto hemos creado un gráfico, ¡pero todavía no sabemos a qué países
+            corresponden los puntos visualizados! Una opción es usar el canal
+            <code>title</code> para visualizar el nombre del país. Con <code>title</code> Plot
+            genera un <em>tooltip</em>, un rectángulo que crea el navegador cuando se produce un
+            <em>hover</em> del mouse sobre la marca (el círculo). <br /><br />
+            Al igual que los otros canales vinculamos el canal con el campo:
+            <code>title: "country"</code>
+          </p>
           <!-- chart_06_color_tooltip_a -->
           <iframe src="chart_06_tooltip_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_tooltip_a */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+        opacity: 0.5,
+        title: "country"
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+  });
+
+</code></pre>
+
           <!-- chart_06_color_tooltip_b -->
+          <p>
+            Mediante una función anónima de javascript podemos acceder a los distintos campos y
+            concatenarlos para el <em>tooltip</em>. Por ejemplo, el nombre del país con la
+            expectativa de vida y la fertilidad:
+            <code
+              >title: (d) => `${d.country}\nExpectativa: ${d.life_expect} años\nFertilidad:
+              ${d.fertility}`</code
+            >
+          </p>
           <iframe src="chart_06_tooltip_b/index.html"></iframe>
-          <!-- chart_06_color_tooltip_c -->
-          <iframe src="chart_06_tooltip_c/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_tooltip_b */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+        opacity: 0.5,
+        title: (d) =>
+          `${d.country}
+          Expectativa: ${d.life_expect} años
+          Fertilidad: ${d.fertility}`,
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+  });
+
+</code></pre>
+
+          <!-- chart_06_text_b -->
+          <p>
+            Otra opción es agregar una marca de texto con el nombre del país. En Plot debemos sumar
+            una marca <code>text</code> en el array <code>marks</code>:
+          </p>
+          <iframe src="chart_06_text_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_text_a */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+        opacity: 0.4,
+      Plot.text(data, {
+        x: "fertility",
+        y: "life_expect",
+        text: "country",
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+  });
+
+</code></pre>
+          <!-- chart_06_text_b -->
+          <p>
+            Para evitar la superposición de los nombres podemos imprimir los países de mayor
+            población pasando una función anónima filtrando aquellos países con población mayor a
+            100 millones de habitantes:
+            <code>text: (d) => (d.pop > 100000000 ? d.country : "")</code>
+          </p>
+          <iframe src="chart_06_text_b/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_text_b */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+        opacity: 0.4,
+      Plot.text(data, {
+        x: "fertility",
+        y: "life_expect",
+        text: (d) => (d.pop > 100000000 ? d.country : ""),
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+  });
+
+</code></pre>
+
+          <h1>To do</h1>
+          <h3>Column and Row Facets</h3>
+
           <!-- chart_07_facets_a -->
           <iframe src="chart_07_facets_a/index.html"></iframe>
           <!-- chart_07_facets_b -->

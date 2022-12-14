@@ -1,8 +1,6 @@
 import addTooltips from "./addTooltips.js";
 let chart;
 d3.csv("data2000.csv", d3.autoType).then((data) => {
-  data = data.sort((a, b) => d3.descending(a.pop, b.pop));
-
   chart = Plot.plot({
     grid: true,
     line: true,
@@ -14,8 +12,7 @@ d3.csv("data2000.csv", d3.autoType).then((data) => {
         fill: "cluster",
         fillOpacity: 0.5,
         r: "pop",
-        title: (d) =>
-          `country: ${d.country} \n fertility: ${d.fertility} \n life_expect: ${d.life_expect} `,
+        title: (d) => `${d.country}`,
       }),
     ],
     color: {
