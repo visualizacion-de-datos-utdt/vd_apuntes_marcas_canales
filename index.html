@@ -518,15 +518,139 @@
   })          
 </code></pre>
 
-          <h1>To do</h1>
           <h3>Color y opacidad</h3>
+          <p>
+            El color también puede ser usado como canal de codificación. El estilo de la
+            codificación de colores depende en gran medida del tipo de dato: los datos categóricos
+            tendrán por defecto un esquema de color cualitativo de varios tonos, mientras que los
+            cuantitativos utilizarán gradientes de color ordenados perceptivamente. <br /><br />
+            Aquí, codificamos el campo cluster con el color del borde del círculo
+            <code>stroke: "cluster"</code> lo que da como resultado un tono distinto para cada valor
+            (A, B, C,...). Además indicamos en <code>color</code> la generación de una leyenda que
+            muestra la correspondencia del color y el dato categórico <code>legend: true</code>.
+          </p>
           <!-- chart_06_color_a -->
           <iframe src="chart_06_color_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_color_a */
+  Plot.plot({
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        stroke: "cluster",
+        r: "pop",
+      }),
+    ],
+  });
+  
+</code></pre>
 
           <!-- chart_06_color_b -->
+          <p>
+            También podemos usar el color en la superficie del círculo:
+            <code>fill: "cluster"</code> y bajamos la opacidad a un valor menor a 1 para que no
+            queden ocultas las superposiciones.
+          </p>
           <iframe src="chart_06_color_b/index.html"></iframe>
+
+          <pre><code class="language-js">
+  /* chart_06_color_b */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+  });
+</code></pre>
+
           <!-- chart_06_color_c -->
+          <p>
+            De forma predeterminada, Plot aplica los colores sin transparencia (opacidad = 1). Si le
+            aplicamos a la opacidad un valor constante menor a 1 haremos visibles los círculos que
+            están superpuestos.
+          </p>
           <iframe src="chart_06_color_c/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_color_c */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+        opacity: 0.5
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    color: {
+      legend: true,
+    },
+  });
+
+</code></pre>
+
+          <!-- chart_06_symbol -->
+          <h3>Forma</h3>
+          <p>
+            El canal de codificación de formas establece una forma geométrica distinta para cada
+            dato categórico, en este caso lo usamos para codificar los clusters:
+            <code>symbol: "cluster"</code>
+            marcas de puntos. A diferencia de los otros canales que hemos visto hasta ahora, el
+            canal de forma solo puede ser utilizado con la marca dot. El canal de codificación de
+            forma solo debe usarse con datos categóricos, ya que no se admiten las comparaciones de
+            magnitud y orden de rango perceptivo.
+            <br /><br />
+            Codificamos el campo de cluster usando tanto la forma como el color. El uso de múltiples
+            canales para el mismo campo de datos subyacente se conoce como codificación redundante.
+            El gráfico resultante combina información de color y forma en una sola leyenda de
+            símbolo:
+          </p>
+          <iframe src="chart_06_symbol/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_06_symbol */
+  Plot.plot({
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        r: "pop",
+        fill: "cluster",
+        symbol: "cluster",
+      }),
+    ],
+    grid: true,
+    line: true,
+    nice: true,
+    symbol: {
+      legend: "true",
+    },
+  });
+
+</code></pre>
+
+          <h1>To do</h1>
+          <h3>Tooltips y ordenamiento</h3>
+
           <!-- chart_06_color_tooltip_a -->
           <iframe src="chart_06_tooltip_a/index.html"></iframe>
           <!-- chart_06_color_tooltip_b -->

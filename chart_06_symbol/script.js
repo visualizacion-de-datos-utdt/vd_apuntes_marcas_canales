@@ -6,13 +6,14 @@ d3.csv("data2000.csv", d3.autoType).then((data) => {
         y: "life_expect",
         r: "pop",
         fill: "cluster",
+        symbol: "cluster",
       }),
     ],
     grid: true,
     line: true,
     nice: true,
-    color: {
-      legend: true,
+    symbol: {
+      legend: "true",
     },
   });
 
