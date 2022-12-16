@@ -648,7 +648,7 @@
 
 </code></pre>
 
-          <h3><em>Tooltips</em> y ordenamiento</h3>
+          <h3><em>Tooltips</em></h3>
           <p>
             Llegados a este punto hemos creado un gráfico, ¡pero todavía no sabemos a qué países
             corresponden los puntos visualizados! Una opción es usar el canal
@@ -784,16 +784,100 @@
   });
 
 </code></pre>
-
-          <h1>To do</h1>
-          <h3>Column and Row Facets</h3>
+          <h3 id="facetas">Facetas</h3>
+          <p>
+            La posición espacial es uno de los canales más poderosos y flexibles para la
+            codificación visual, pero ¿qué podemos hacer si ya tenemos campos asignados a los
+            canales x e y? Una técnica valiosa es crear una grilla de gráficos, que conste de
+            subgráficos que muestran un subconjunto de los datos. Es técnica más general para
+            presentar datos utilizando pequeños múltiplos de vistas (<em
+              ><a href="https://en.wikipedia.org/wiki/Small_multiple" target="_blank"
+                >small multiples</a
+              ></em
+            >, Tufte). <br /><br />
+            En Plot se lo denomina <code>facet</code>. Debemos indicar el conjunto de datos
+            (<code>data</code>), el campo categórico que definirá los subgráficos y se aplicará la
+            grilla y el eje (x o y). En este ejemplo mapeamos <code>cluster</code> sobre el eje x
+            generando una fila horizontal de gráficos:
+          </p>
 
           <!-- chart_07_facets_a -->
           <iframe src="chart_07_facets_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_07_facets_a */
+  Plot.plot({
+    grid: true,
+    nice: true,
+    zero: true,
+    color: {
+      legend: true,
+    },
+    facet: {
+      data: data,
+      x: "cluster",
+    },
+    marks: [
+      Plot.dot(data, {
+        x: "fertility",
+        y: "life_expect",
+        fill: "cluster",
+        fillOpacity: 0.6,
+        r: "pop",
+        title: "country",
+      }),
+    ],
+  });
+
+</code></pre>
+
           <!-- chart_07_facets_b -->
+          <p>
+            El gráfico anterior queda desproporcionado con las medidas predeterminadas, lo que
+            dificulta la comparación de las subgráficos entre sí. Podemos asignar nuevos valores a
+            las propiedades de ancho y alto para crear un conjunto más pequeño de múltiplos. Y
+            ajustar el rango del radio del círculo. Además, dado que los encabezados de los
+            subgráficos etiquetan los valores de cluster, podemos eliminar la leyenda de color.
+          </p>
           <iframe src="chart_07_facets_b/index.html"></iframe>
+          <pre><code class="language-js">
+/* chart_07_facets_b */
+Plot.plot({
+  grid: true,
+  nice: true,
+  zero: true,
+  width: 800,
+  height: 200,
+  r: { range: [0, 18] },
+  facet: {
+    data: data,
+    x: "cluster",
+  },
+  marks: [
+    Plot.dot(data, {
+      x: "fertility",
+      y: "life_expect",
+      fill: "cluster",
+      fillOpacity: 0.6,
+      r: "pop",
+      title: "country",
+    }),
+  ],
+});
+
+</code></pre>
+          <h4>Filtrado interactivo (mirada al futuro)</h4>
+          <p>
+            En módulos posteriores, estudiaremos técnicas de interacción para la exploración de
+            datos. Acá hay un adelanto: vinculamos un <em>slider</em> al campo
+            <code>year</code> para permitirle al usuario filtrar los datos por año. No se preocupe
+            si el código del proyecto <code>chart_08_slider</code> es un poco confuso en este punto,
+            ya que más adelante cubriremos la interacción en detalle. Arrastre el slider hacia
+            adelante y hacia atrás para ver cómo cambian los valores de los datos en el tiempo.
+          </p>
           <!-- chart_08_slider -->
           <iframe src="chart_08_slider/index.html"></iframe>
+
+          <h1>To do</h1>
           <!-- chart_09_dot_mark_symbol-->
           <iframe src="chart_09_dot_mark_symbol/index.html"></iframe>
           <!-- chart_10_circle_mark -->
