@@ -5,7 +5,7 @@ d3.csv("data.csv", d3.autoType).then((data) => {
 function createChart(data){
   let chart = Plot.plot({
     height:500,
-    width:300,
+    width:400,
     marginLeft:60,
     marginBottom:50,
     marks: [
@@ -17,7 +17,8 @@ function createChart(data){
       })
     ],
     x:{
-      tickRotate:-90,
+      tickFormat: d3.format(".0f"), 
+      type: "ordinal",
     },
     y:{
       ticks:7,
