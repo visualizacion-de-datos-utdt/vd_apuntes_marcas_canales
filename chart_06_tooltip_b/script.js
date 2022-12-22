@@ -1,17 +1,16 @@
-let chart;
-d3.csv("data2000.csv", d3.autoType).then((data) => {
-  console.table(data);
+let chart
+d3.csv('data2000.csv', d3.autoType).then(data => {
+  console.table(data)
 
   chart = Plot.plot({
     marks: [
       Plot.dot(data, {
-        x: "fertility",
-        y: "life_expect",
-        r: "pop",
-        fill: "cluster",
+        x: 'fertility',
+        y: 'life_expect',
+        r: 'pop',
+        fill: 'cluster',
         opacity: 0.5,
-        title: (d) =>
-          `${d.country}
+        title: d => `${d.country}
 Expectativa: ${d.life_expect} años
 Fertilidad: ${d.fertility}`,
       }),
@@ -22,7 +21,7 @@ Fertilidad: ${d.fertility}`,
     color: {
       legend: true,
     },
-  });
+  })
 
-  d3.select("#chart").append(() => chart);
-});
+  d3.select('#chart').append(() => chart)
+})
