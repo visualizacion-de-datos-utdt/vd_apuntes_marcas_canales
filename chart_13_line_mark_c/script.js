@@ -18,7 +18,8 @@ function createChart(data) {
       ),
     ],
     x: {
-      tickRotate: -90,
+      tickFormat: d3.format('.0f'),
+      type: 'ordinal',
     },
     y: {
       ticks: 7,

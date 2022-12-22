@@ -1,5 +1,7 @@
 let chart;
 let data;
+let valuesDomainX;
+let valuesDomainY;
 
 let selectElement = d3.select("#input");
 selectElement.on("change", (event) => {
@@ -11,6 +13,8 @@ selectElement.on("change", (event) => {
 d3.csv("data.csv", d3.autoType).then((dataChart) => {
   data = dataChart;
   let initYear = selectElement.attr("value");
+  valuesDomainX = [d3.min(data, (d) => d.fertility) , d3.max(data, (d) => d.fertility)]
+  valuesDomainY = [d3.min(data, (d) => d.life_expect) , d3.max(data, (d) => d.life_expect)]
   changeValueInput(initYear);
   createChart(initYear);
 });
@@ -40,6 +44,12 @@ function createChart(yearSelected) {
     color: {
       legend: "ramp",
     },
+    x: {
+      domain: valuesDomainX
+    },
+    y:{
+      domain: valuesDomainY
+    }
   });
   d3.select("#chart figure").remove();
   d3.select("#chart").append(() => chart);
