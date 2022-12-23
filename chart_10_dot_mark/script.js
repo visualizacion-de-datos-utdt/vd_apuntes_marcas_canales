@@ -1,29 +1,17 @@
-d3.csv("data2000.csv", d3.autoType).then((data) => {
-  createChart(data);
-});
-
-function createChart(data) {
+d3.csv('data2000.csv', d3.autoType).then(data => {
   let chart = Plot.plot({
+    width: 600,
     height: 200,
     line: true,
     nice: true,
     zero: true,
+    grid: true,
     marks: [
       Plot.dot(data, {
-        x: "fertility",
-        y: "cluster",
-        fill: "#666af0",
-        fillOpacity: 0.6,
-        r: 7,
+        x: 'fertility',
+        y: 'life_expect',
       }),
     ],
-    x: {
-      grid: true,
-    },
-    y: {
-      reverse: true,
-      ticks: 5,
-    },
-  });
-  d3.select("#chart").append(() => chart);
-}
+  })
+  d3.select('#chart').append(() => chart)
+})

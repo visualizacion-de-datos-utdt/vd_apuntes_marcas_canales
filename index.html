@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css" /> -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
 
     <link rel="stylesheet" href="style.css" />
@@ -784,7 +783,7 @@
   });
 
 </code></pre>
-          <h3 id="facetas">Facetas</h3>
+          <h3 id="faces">Faces</h3>
           <p>
             La posición espacial es uno de los canales más poderosos y flexibles para la
             codificación visual, pero ¿qué podemos hacer si ya tenemos campos asignados a los
@@ -876,18 +875,203 @@ Plot.plot({
           </p>
           <!-- chart_08_slider -->
           <iframe src="chart_08_slider/index.html"></iframe>
+          <hr />
+          <h2 id="marcas">Marcas gráficas</h2>
+          <p>
+            En la exploración de canales de codificación utilizamos (casi) exclusivamente marcas de
+            puntos (<code>Plot.dot()</code>) para visualizar datos. Sin embargo, el tipo de marca de
+            punto es solo una de las muchas formas geométricas que se pueden usar para representar
+            datos visualmente. Plot.js incluye varios tipos de marcas. Algunas de ellas son:
+          </p>
+          <ul>
+            <li><code>dot()</code>: Círculos u otras formas geométricas.</li>
+            <li>
+              <code>areaX()</code>
+              /
+              <code>areaY</code>: Áreas rellenas definidas por una línea superior y una línea base.
+            </li>
 
-          <h1>To do</h1>
+            <li><code>barX()</code> / <code>barY</code>: Barras rectangulares.</li>
+            <li><code>line()</code> Segmentos de línea conectados.</li>
+            <li><code>cell()</code> Celdas: rectángulos rellenos, útiles para mapas de calor.</li>
+            <li><code>text()</code> Puntos (coordenadas x, y) representados por texto.</li>
+            <li>
+              <code>tick()</code> Líneas horizontales o verticales en donde el eje de la posición es
+              cuantitativo y el otro eje es categórico.
+            </li>
+
+            <li>
+              Para la lista completa de marcas consultar la documentación de Plot.js
+              <a href="https://observablehq.com/@observablehq/plot#marks"
+                >Todas las marcas de Plot.js</a
+              >. A continuación, veremos paso a paso algunos de los tipos de marcas más utilizados
+              para gráficos estadísticos.
+            </li>
+          </ul>
+
           <!-- chart_09_dot_mark_symbol-->
-          <iframe src="chart_09_dot_mark_symbol/index.html"></iframe>
-          <!-- chart_10_circle_mark -->
+          <!-- <iframe src="chart_09_dot_mark_symbol/index.html"></iframe> -->
+
+          <!-- chart_10_dot_mark -->
+          <h4>Marcas de punto</h4>
+          <p>
+            Además de codificar canales, podemos elegir distintos tipos de marcas gráficas de
+            acuardo a lo querramos comunicar con los datos con
+            <code>Plot.nombre_de_la_marca()</code>. <br /><br />
+            La marca de punto <code>dot()</code>
+            representa los datos como círculos, frecuentemente colocados en dimensiones
+            cuantitativas x e y, como en un gráfico de dispersión. Por ejemplo, el siguiente
+            diagrama de dispersión muestra la relación aproximadamente inversa entre la expectativa
+            de vida en y↑ y la fertilidad en x→
+          </p>
           <iframe src="chart_10_dot_mark/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_10_dot_mark */
+  Plot.plot({
+    height: 200,
+    width: 500,
+    line: true,
+    nice: true,
+    zero: true,
+    grid: true,
+    marks: [
+      Plot.dot(data, {
+        x: 'fertility',
+        y: 'life_expect',
+      }),
+    ],
+  })
+            
+            </code></pre>
+          <!-- chart_10_dot_mark_square -->
+          <p>
+            Con la marca punto se pueden elegir, además del círculo, otras formas geométricas
+            utilizando la propiedad
+            <code>symbol</code>. Disponibles: cruz <code>cross</code>, rombo <code>diamond</code>,
+            cuadrado <code>square</code>, estrella <code>star</code>, triangle
+            <code>triangle</code>, "Y" <code>wye</code>
+          </p>
+          <iframe src="chart_10_dot_mark_square/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_10_dot_mark_square */
+  Plot.plot({
+    width: 600,
+    height: 200,
+    line: true,
+    nice: true,
+    zero: true,
+    grid: true,
+    marks: [
+      Plot.dot(data, {
+        x: 'fertility',
+        y: 'cluster',
+        fillOpacity: 0.6,
+        symbol: 'square',
+      }),
+    ],
+  })
+            
+            </code></pre>
+
           <!-- chart_11_tick_mark -->
+          <h4>Marcas de tilde (<i>tick</i>)</h4>
+          <p>
+            Los <i>ticks</i> son líneas horizontales o verticales. Un tickY↔︎ tiene un valor y,
+            mientras que un tickX↕︎ tiene un valor x. Los ticks se usan habitualmente para mostrar
+            distribuciones unidimensionales, como en el gráfico de "código de barras" a continuación
+            que muestra la densidad de fertilidad en cada cluster de países.
+          </p>
           <iframe src="chart_11_tick_mark/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_11_tick_mark */
+  Plot.plot({
+    marks: [
+      Plot.tickX(data, {
+        x: 'fertility',
+        y: 'cluster',
+      }),
+    ],
+    width: 600,
+    height: 200,
+    line: true,
+    nice: true,
+    grid: true,
+  })
+            
+            </code></pre>
+
+          <h3>Marca de barras</h3>
           <!-- chart_12_bar_mark_a -->
+          <p>
+            El tipo de marca de barras dibuja un rectángulo con una posición, un ancho y un alto.
+            <br /><br />
+            El siguiente gráfico es un gráfico de barras verticales <code>barY()</code> simple de la población (<code>pop</code>)
+            de cada país. Con la función <code>sort()</code> de d3 ordenamos  el dominio de <b>x</b> de manera descendente según la población.
+          </p>
           <iframe src="chart_12_bar_mark_a/index.html"></iframe>
-          <!-- chart_12_bar_mark_c -->
-          <iframe src="chart_12_bar_mark_c/index.html"></iframe>
+          <code><pre>
+  /* chart_12_bar_mark_a */
+  Plot.plot({
+    marks: [
+      Plot.barY(data, {
+        x: 'country',
+        y: 'pop',
+      }),
+    ],
+    x: {
+      tickRotate: -45,
+      domain: d3.sort(data, (a, b) => d3.descending(a.pop, b.pop)).map(d => d.country),
+    },
+    y: {
+      grid: true,
+    },
+    height: 400,
+    width: 1000,
+    marginLeft: 100,
+    marginBottom: 100,
+  })
+            
+            </code></pre>
+          <!-- chart_12_bar_mark_group -->
+          <p>
+            El ejemplo anterior crea un gráfico de barras a partir de una línea de base cero, y el
+            canal <strong>y</strong> solo codifica el valor distinto de cero con la longitud de la
+            barra. Sin embargo, la marca de barra también permite especificar puntos de inicio y
+            final para visualizar rangos. <br /><br />
+            El siguiente gráfico utiliza los canales <b>x1</b> (punto de partida) y <b>x2</b> (punto
+            final) para mostrar el rango de fertilidad dentro de cada grupo regional (cluster).
+            Utilizamos las funciones de agregación mínimo y máximo para determinar los extremos del
+            rango. Previamente agrupamos por cluster con la función de transformación
+            <code>groupY</code>.
+          </p>
+          <iframe src="chart_12_bar_mark_group/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_12_bar_mark_group */
+  Plot.plot({
+    marks: [
+      Plot.barX(
+        data,
+        Plot.groupY(
+          {
+            x1: 'min',
+            x2: 'max',
+          },
+          { x: 'fertility', y: 'cluster' },
+        ),
+      ),
+    ],
+    x: {
+      label: 'Min of life_expect, Max of life_expect',
+    },
+    height: 200,
+    width: 600,
+    grid: true,
+    nice: true,
+    line: true,
+  })
+            
+            </code></pre>
+
           <!-- chart_13_line_mark_a -->
           <iframe src="chart_13_line_mark_a/index.html"></iframe>
           <!-- chart_13_line_mark_a_color -->
@@ -924,8 +1108,8 @@ Plot.plot({
     <!-- <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
     <script>
-      hljs.highlightAll();
-      iFrameResize({});
+      hljs.highlightAll()
+      iFrameResize({})
       // iFrameResize();
       // var pymParent = new pym.Parent("chart_01_x", "./chart_01_x/index.html", {});
     </script>
