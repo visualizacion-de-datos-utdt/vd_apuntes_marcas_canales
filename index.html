@@ -1000,16 +1000,17 @@ Plot.plot({
             
             </code></pre>
 
-          <h3>Marca de barras</h3>
+          <h4>Marca de barras</h4>
           <!-- chart_12_bar_mark_a -->
           <p>
             El tipo de marca de barras dibuja un rectángulo con una posición, un ancho y un alto.
             <br /><br />
-            El siguiente gráfico es un gráfico de barras verticales <code>barY()</code> simple de la población (<code>pop</code>)
-            de cada país. Con la función <code>sort()</code> de d3 ordenamos  el dominio de <b>x</b> de manera descendente según la población.
+            El siguiente gráfico es un gráfico de barras verticales <code>barY()</code> simple de la
+            población (<code>pop</code>) de cada país. Con la función <code>sort()</code> de d3
+            ordenamos el dominio de <b>x</b> de manera descendente según la población.
           </p>
           <iframe src="chart_12_bar_mark_a/index.html"></iframe>
-          <code><pre>
+          <pre><code class="language-js">
   /* chart_12_bar_mark_a */
   Plot.plot({
     marks: [
@@ -1019,8 +1020,8 @@ Plot.plot({
       }),
     ],
     x: {
-      tickRotate: -45,
       domain: d3.sort(data, (a, b) => d3.descending(a.pop, b.pop)).map(d => d.country),
+      tickRotate: -45,
     },
     y: {
       grid: true,
@@ -1071,9 +1072,32 @@ Plot.plot({
   })
             
             </code></pre>
+          <h4>Marca de línea</h4>
+          <p>
+            La marca de línea <code>line()</code> conecta puntos con segmentos de línea. Por
+            ejemplo, pendiente de una línea comunica visualmente la tasa de cambio de una variable.
+            <br /><br />
+            Tracemos un gráfico de líneas de la fertilidad por país a lo largo de los años,
+            utilizando los datos de desarrollo mundial completo y sin filtrar.
+          </p>
 
           <!-- chart_13_line_mark_a -->
           <iframe src="chart_13_line_mark_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_13_line_mark_a_color */
+  Plot.plot({
+    marks: [
+      Plot.line(data, {
+        x: 'year',
+        y: 'fertility',
+        stroke: 'country',
+      }),
+    ],
+  })
+            
+            </code></pre>
+          <h1>To do</h1>
+
           <!-- chart_13_line_mark_a_color -->
           <iframe src="chart_13_line_mark_a_color/index.html"></iframe>
           <!-- chart_13_line_mark_b -->

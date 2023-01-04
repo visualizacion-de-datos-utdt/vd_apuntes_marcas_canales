@@ -5,7 +5,7 @@
 ### \* Traducción al castellano y migración a Plot.js del artículo:
 
 - [Jeffrey Heer. _Data Types, Graphical Marks, and Visual Encoding Channels_, UW Interactive Data Lab](https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum)
-- [Plot: Marks and Channels](https://observablehq.com/@observablehq/plot-marks?collection=@observablehq/plot)
+- [Mike Bostock. _Plot: Marks and Channels_, Observable Plot](https://observablehq.com/@observablehq/plot-marks?collection=@observablehq/plot)
 
 ## Visualización
 
