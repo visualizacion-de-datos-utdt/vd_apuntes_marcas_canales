@@ -1074,17 +1074,23 @@ Plot.plot({
             </code></pre>
           <h4>Marca de línea</h4>
           <p>
-            La marca de línea <code>line()</code> conecta puntos con segmentos de línea. Por
-            ejemplo, pendiente de una línea comunica visualmente la tasa de cambio de una variable.
+            La marca de línea <code>line()</code> conecta puntos con una línea. Con una línea se
+            puede comunicar, por ejemplo, a través de la pendiente tasa de cambio de una variable.
             <br /><br />
-            Tracemos un gráfico de líneas de la fertilidad por país a lo largo de los años,
-            utilizando los datos de desarrollo mundial completo y sin filtrar.
+            Hagamos un gráfico de líneas múltiples de la fertilidad por país a lo largo de los años,
+            utilizando los datos de desarrollo mundial sin filtrar.
+
+            <br /><br />
+            Podemos ver variaciones interesantes por país, pero tendencias generales de menor número
+            de hijos por familia a lo largo del tiempo. También tenga en cuenta que establecemos un
+            ancho personalizado de 400 píxeles. ¡Intente cambiar (o eliminar) los anchos y vea qué
+            sucede!
           </p>
 
           <!-- chart_13_line_mark_a -->
           <iframe src="chart_13_line_mark_a/index.html"></iframe>
           <pre><code class="language-js">
-  /* chart_13_line_mark_a_color */
+  /* chart_13_line_mark_a */
   Plot.plot({
     marks: [
       Plot.line(data, {
@@ -1094,12 +1100,38 @@ Plot.plot({
       }),
     ],
   })
-            
             </code></pre>
           <h1>To do</h1>
 
           <!-- chart_13_line_mark_a_color -->
-          <iframe src="chart_13_line_mark_a_color/index.html"></iframe>
+          <iframe src="chart_13_line_mark_highlight/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_13_line_mark_highlight */
+  Plot.plot({
+    marks: [
+      Plot.line(data, {
+        x: 'year',
+        y: 'fertility',
+        z: 'country',
+        stroke: d => (d.cluster == 'C' ? 'red' : '#ccc'),
+        sort: d => d.cluster == 'C',
+      }),
+    ],
+    line: true,
+    y: { zero: true },
+  })
+                  </code></pre>
+          <p>
+            Cambiemos algunos de los parámetros de marca predeterminados para personalizar el
+            gráfico. Podemos configurar el ancho del trazo para determinar el grosor de las líneas y
+            la opacidad para agregar algo de transparencia. De forma predeterminada, la marca de
+            línea utiliza segmentos de línea recta para conectar puntos de datos. En algunos casos,
+            es posible que queramos suavizar las líneas. Podemos ajustar la interpolación utilizada
+            para conectar puntos de datos configurando el parámetro de marca de interpolación.
+            Usemos la interpolación 'monótona' para proporcionar líneas suaves que también
+            garanticen que no generarán inadvertidamente valores mínimos o máximos "falsos" como
+            resultado de la interpolación.
+          </p>
           <!-- chart_13_line_mark_b -->
           <iframe src="chart_13_line_mark_b/index.html"></iframe>
           <!-- chart_13_line_mark_c -->
