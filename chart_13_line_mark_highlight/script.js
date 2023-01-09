@@ -5,12 +5,15 @@ d3.csv('data.csv', d3.autoType).then(data => {
         x: 'year',
         y: 'fertility',
         z: 'country',
-        stroke: d => (d.cluster == 'C' ? 'red' : '#ccc'),
-        sort: d => d.cluster == 'C',
+        stroke: 'fertility',
       }),
     ],
-    line: true,
+    x: {
+      // https://github.com/observablehq/plot#formats
+      tickFormat: 'd',
+    },
     y: { zero: true },
+    line: true,
   })
   d3.select('#chart').append(() => chart)
 })
