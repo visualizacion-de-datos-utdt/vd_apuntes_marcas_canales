@@ -1069,9 +1069,38 @@ Plot.plot({
     grid: true,
     nice: true,
     line: true,
-  })
-            
             </code></pre>
+          <p>
+            El ancho de cada barra se establece en función del ancho del gráfico y el número de
+            barras. Entonces para cambiar el ancho, podemos establecer un <code>width</code> menor
+            al predeterminado: <br /><br />
+            <code>width: 300</code>
+            <br /><br />
+            Las barras también se pueden apilar. Cambiemos la codificación x por <b>cluster</b> y
+            codifiquemos el país usando el canal de color. También desactivamos la leyenda (¡que
+            sería muy larga con colores para todos los países!) y usemos <code>title</code>
+            para obtener el nombre del país y la población por hover.
+          </p>
+
+          <!-- chart_12_bar_mark_stacked -->
+          <iframe src="chart_12_bar_mark_stacked/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_12_bar_mark_stacked */
+  Plot.plot({
+    marks: [
+      Plot.barY(data, {
+        x: 'cluster',
+        y: 'pop',
+        fill: 'country',
+        sort: 'pop',
+        title: d => d.country + '\n' + d.pop,
+      }),
+    ],
+    marginLeft: 70,
+    width: 300,
+  })
+            </code></pre>
+
           <h4>Marca de línea</h4>
           <p>
             La marca de línea <code>line()</code> conecta puntos con una línea. Con una línea se
