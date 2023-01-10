@@ -1189,11 +1189,54 @@ Plot.plot({
     },
   })
                   </code></pre>
-          <h1>TO DO</h1>
+          <p>
+            La marca <code>line</code> también se puede utilizar para crear gráficos de pendientes
+            (también llamados de coordenadas paralelas), gráficos que resaltan el cambio de valor
+            entre dos puntos utilizando las pendientes. <br /><br />
+            A continuación, creamos un gráfico de pendiente que compara las poblaciones de cada país
+            en los años mínimo y máximo en nuestro conjunto de datos: 1955 y 2005. Para esto
+            filtramos los datos de esos años:
+            <code>data.filter(d => d.year == 1955 || d.year == 2005)</code>
+            <br /><br />
+          </p>
           <!-- chart_13_line_mark_c -->
           <iframe src="chart_13_line_mark_c/index.html"></iframe>
-          <!-- chart_13_link_mark -->
-          <iframe src="chart_13_link_mark/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_13_line_mark_c */
+  Plot.plot({
+    marks: [
+      Plot.line(
+        data.filter(d => d.year == 1955 || d.year == 2005),
+        {
+          x: 'year',
+          y: 'pop',
+          stroke: 'country',
+          opacity: 0.7,
+        },
+      ),
+    ],
+    x: {
+      tickFormat: 'd',
+      type: 'ordinal',
+    },
+    y: {
+      tickFormat: d3.format(',.0f'),
+      ticks: 6,
+      zero: true,
+    },
+    width: 300,
+    marginLeft: 70,
+    line: true,
+  })
+                  </code></pre>
+          <p>
+            Para este tipo de gráficos en Plot se puede utilizar la marca <code>link</code> donde
+            hay que transformar un poco los datos para que se adapte mejor al tipo de marca.
+            <a href="./chart_13_link_mark/script.js"
+              >Ver código del mismo ejemplo utilizando la marca <code>link</code></a
+            >
+          </p>
+
           <!-- chart_14_area_mark_a -->
           <iframe src="chart_14_area_mark_a/index.html"></iframe>
           <!-- chart_14_area_mark_b -->
