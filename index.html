@@ -1236,27 +1236,226 @@ Plot.plot({
               >Ver código del mismo ejemplo utilizando la marca <code>link</code></a
             >
           </p>
+          <h4>Marca de área</h4>
+          <p>
+            El tipo de marca <code>area</code> combina aspectos de la marca de línea y de la de
+            barras: visualiza conexiones (pendientes) entre puntos de datos, y también muestra una
+            superficie, con una línea de base de valor cero.
 
+            <br /><br />
+            El siguiente gráfico utiliza una marca de área de la tasa de fertilidad de la Argentina
+            a lo largo del tiempo:
+          </p>
           <!-- chart_14_area_mark_a -->
           <iframe src="chart_14_area_mark_a/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_14_area_mark_a */
+  Plot.plot({
+    marks: [
+      Plot.areaY(
+        data.filter(d => d.country == 'Argentina'),
+        {
+          x: 'year',
+          y: 'fertility',
+          opacity: 0.3,
+        },
+      ),
+    ],
+    line: true,
+    x: {
+      tickFormat: 'd',
+      ticks: 11,
+    },
+    y: {
+      ticks: 7,
+      grid: true,
+    },
+  })
+                  </code></pre>
+          <p>
+            Al igual que las marcas de línea, las de área admiten el parámetro
+            <code>curve</code> para modificar el tipo de curva.
+          </p>
           <!-- chart_14_area_mark_b -->
           <iframe src="chart_14_area_mark_b/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_14_area_mark_b */
+  Plot.plot({
+    marks: [
+      Plot.areaY(
+        data.filter(d => d.country == 'Argentina'),
+        {
+          x: 'year',
+          y: 'fertility',
+          opacity: 0.3,
+          curve: 'natural'
+        },
+      ),
+    ],
+    line: true,
+    x: {
+      tickFormat: 'd',
+      ticks: 11,
+    },
+    y: {
+      ticks: 7,
+      grid: true,
+    },
+  })
+                  </code></pre>
+
           <!-- chart_14_area_mark_c -->
+          <p>
+            Al igual que las marcas de barras, las marcas de área también admiten el apilamiento.
+            Aquí filtramos los datos con de Argentina, Brasil y Chile:
+            <br />
+            <br />
+            <code
+              >let dataABC = data.filter( d => d.country == 'Argentina' || d.country == 'Chile' ||
+              d.country == 'Brazil', )</code
+            >
+            <br />
+            <br />
+            y luego los graficamos usando una marca de área y un canal de codificación de color para
+            apilarlos por país.
+          </p>
+
           <iframe src="chart_14_area_mark_c/index.html"></iframe>
+          <pre><code class="language-js">
+  /* chart_14_area_mark_c */
+  Plot.plot({
+    marks: [
+      Plot.areaY(dataABC, {
+        x: 'year',
+        y: 'pop',
+        sort: d => -d.pop, // orden descendente
+        fill: 'country',
+      }),
+    ],
+    x: {
+      tickFormat: 'd',
+    },
+    y: {
+      tickFormat: d3.format(',.0f'),
+      grid: true,
+    },
+    marginLeft: 70,
+    line: true,
+    color: {
+      legend: true,
+    },
+  })
+                  </code></pre>
+          <p>
+            De forma predeterminada, el apilamiento se realiza en relación con una línea de base
+            cero. Sin embargo, hay otras opciones de apilamiento disponibles usando la propiedad <code>offset</code>: <br />
+
+            <ul>
+              <li><code>silhouette</code>: para apilar las áreas en relación a un eje de alineación en el centro del gráfico.</li>
+              <li><code>expand</code>: para normalizar los datos sumados en cada punto de apilamiento al 100% (rango de 0 a 1), lo que permite realizar comparaciones porcentuales.</li>
+            </ul>
+            <br>
+            A continuación, adaptamos el gráfico configurando la propiedad <code>offset</code> con <code>silhouette</code>. ¿Qué sucede si, en cambio, se configura con <code>expand</code>?
+          </p>
+
           <!-- chart_14_area_mark_d -->
           <iframe src="chart_14_area_mark_d/index.html"></iframe>
+<pre><code class="language-js">
+  /* chart_14_area_mark_d */
+  Plot.plot({
+    marks: [
+      Plot.areaY(dataABC, {
+        x: 'year',
+        y: 'pop',
+        offset: 'silhouette',
+        sort: d => -d.pop, // orden descendente
+        fill: 'country',
+      }),
+    ],
+    x: {
+      tickFormat: 'd',
+    },
+    y: {
+      tickFormat: d3.format(',.0f'),
+      grid: true,
+    },
+    marginLeft: 70,
+    line: true,
+    color: {
+      legend: true,
+    },
+  })
+                  </code></pre>
+
+
           <!-- chart_14_area_mark_e -->
+          <p>La marca de área también admite líneas inferiores basadas en datos. En este ejemplo usamos los canales <b>y1</b> e <b>y2</b> para codificar los mínimos y máximos de fertilidad de cada año. Previamente necesitamos hacer una adaptación de nuestros datos:</p>
+
+<pre><code class="language-js">
+  let dataABC = data.filter(
+    d => d.country === 'Argentina' 
+         || d.country === 'Brasil' 
+         || d.country === 'Chile')
+
+  let dataMinMax = d3
+    .groups(dataABC, d => d.year)
+    .map(d => {
+      return {
+        year: d[0],
+        min: d3.min(d[1], d => d.fertility),
+        max: d3.max(d[1], d => d.fertility),
+      }
+    })  
+    // Obtenemos esta estructura de datos
+    // [{max: 5.486, min: 3.1265, year: 1955}, {}, {}]
+  </code></pre>
+  <p>De esta manera con el mínimo de la fertilidad está codificado en la línea inferior del área y el máximo en la superior. Además agregamos una marca de línea para mostrar la fertilidad promedio.</p>
           <iframe src="chart_14_area_mark_e/index.html"></iframe>
+<pre><code class="language-js">
+  Plot.plot({
+    marks: [
+      Plot.areaY(dataMinMax, {
+        x: 'year',
+        y1: 'min',
+        y2: 'max',
+        fillOpacity: 0.3,
+      }),
+      Plot.lineY(dataMinMax, { x: 'year', y: d => (d.max + d.min) / 2 }),
+    ],
+    x: {
+      tickFormat: 'd',
+    },
+    y: {
+      grid: true,
+      label: 'Min - Máx fertility',
+    },
+    line: true,
+  })
+  </code></pre>
+
+  <h3>Resumen</h3>
+  <p>
+Hemos completado nuestro recorrido por los tipos de datos, los canales de codificación y las marcas gráficas. Para obtener una referencia completa (incluidas las funciones que hemos omitido aquí) consultar la documentación de <a href="https://observablehq.com/@observablehq/plot?collection=@observablehq/plot">Plot.js</a> .
+</p>
+<p>El estudio sistemático de marcas, codificaciones visuales y tipos de datos de respaldo fue iniciado por <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques Bertin</a> en su obra de 1967 <em>Sémiologie Graphique (La semiología de los gráficos)</em>.
+</p>
+<hr>
+<p>
+  Traducción al castellano y migración a Plot.js del artículo:
+<br>
+  <a
+  href="https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum"
+  >Jeffrey Heer. <em>Data Types, Graphical Marks, and Visual Encoding Channels</em>, UW Interactive Data Lab</a>
+</p>
+<br><br>
+          
+
           <!-- chart_14_area_mark_f -->
-          <iframe src="chart_14_area_mark_f/index.html"></iframe>
+          <!-- <iframe src="chart_14_area_mark_f/index.html"></iframe> -->
           <!-- chart_15_two_marks_a -->
-          <iframe src="chart_15_marks_a/index.html"></iframe>
+          <!-- <iframe src="chart_15_marks_a/index.html"></iframe> -->
           <!-- chart_15_two_marks_b -->
-          <iframe src="chart_15_marks_b/index.html"></iframe>
-          <a
-            href="https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum"
-            >UW Interactive Data Lab. Data Types, Graphical Marks, and Visual Encoding Channels
-          </a>
+          <!-- <iframe src="chart_15_marks_b/index.html"></iframe> -->
         </div>
       </div>
     </div>

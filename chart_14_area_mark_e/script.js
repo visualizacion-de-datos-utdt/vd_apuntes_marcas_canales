@@ -1,34 +1,40 @@
-d3.csv("data.csv", d3.autoType).then((data) => {
-  let dataNA = data.filter( d => d.country ===  "United States" || d.country ===  "Canada" || d.country ===  "Mexico")
-  createChart(dataNA)
-});
+d3.csv('data.csv', d3.autoType).then(data => {
+  let dataABC = data.filter(
+    d => d.country === 'Argentina' || d.country === 'Brasil' || d.country === 'Chile',
+  )
 
-function createChart(data){
+  // adaptamos los datos con los máx y min de fertilidad de c/ año
+  let dataMinMax = d3
+    .groups(dataABC, d => d.year)
+    .map(d => {
+      return {
+        year: d[0],
+        min: d3.min(d[1], d => d.fertility),
+        max: d3.max(d[1], d => d.fertility),
+      }
+    })
+  console.log(dataMinMax)
+
   let chart = Plot.plot({
-    height:400,
-    width:600,
-    marginLeft:60,
-    marginBottom:50,
-    line:true,
-    nice:true,
     marks: [
-      Plot.areaY(data, { 
-        x: "year",
-        y1: d => d3.min( data.filter( dat => dat.year == d.year), (d) => d.fertility),
-        y2: d => d3.max( data.filter( dat => dat.year == d.year), (d) => d.fertility), 
-        fill:"#0077b6"
-      })
+      Plot.areaY(dataMinMax, {
+        x: 'year',
+        y1: 'min',
+        y2: 'max',
+        fillOpacity: 0.3,
+      }),
+      Plot.lineY(dataMinMax, { x: 'year', y: d => (d.max + d.min) / 2 }),
     ],
-    x:{
-      ticks:11,
-      tickRotate:-90,
+    x: {
+      tickFormat: 'd',
     },
-    y:{
-      domain:[ 0, d3.max(data, (d) => d.fertility)],
-      grid:true,
-      label:"Min of fertility, Max of fertility"
+    y: {
+      grid: true,
+      label: 'Min - Máx fertility',
     },
-  });
-  d3.select("#chart").append(() => chart);
-};
+    line: true,
+  })
+  d3.select('#chart').append(() => chart)
+})
 
+function createChart(data) {}

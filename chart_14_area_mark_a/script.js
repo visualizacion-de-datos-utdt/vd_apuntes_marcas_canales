@@ -1,31 +1,24 @@
-d3.csv("data.csv", d3.autoType).then((data) => {
-  createChart(data)
-});
-
-function createChart(data){
+d3.csv('data.csv', d3.autoType).then(data => {
   let chart = Plot.plot({
-    height:500,
-    width:400,
-    marginLeft:60,
-    marginBottom:50,
-    line:true,
     marks: [
-      Plot.areaY(data.filter(d => d.country == "United States"), {
-        x: "year", 
-        y: "fertility", 
-        fill: "country",
-      })
+      Plot.areaY(
+        data.filter(d => d.country == 'Argentina'),
+        {
+          x: 'year',
+          y: 'fertility',
+          opacity: 0.3,
+        },
+      ),
     ],
-    x:{
-      domain:[d3.min(data, (d) => d.year)-1,d3.max(data, (d) => d.year)+1],
-      ticks:11,
-      tickRotate:-90,
+    line: true,
+    x: {
+      tickFormat: 'd',
+      ticks: 11,
     },
-    y:{
-      ticks:7,
-      grid:true,
+    y: {
+      ticks: 7,
+      grid: true,
     },
-  });
-  d3.select("#chart").append(() => chart);
-};
-
+  })
+  d3.select('#chart').append(() => chart)
+})

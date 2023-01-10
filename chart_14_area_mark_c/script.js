@@ -1,35 +1,38 @@
-d3.csv("data.csv", d3.autoType).then((data) => {
-  let dataNA = data.filter( d => d.country ===  "United States" || d.country ===  "Canada" || d.country ===  "Mexico")
-  createChart(dataNA)
-});
+// config. números español
+const locale = {
+  decimal: ',',
+  thousands: '.',
+  grouping: [3],
+}
+d3.formatDefaultLocale(locale)
 
-function createChart(data){
+d3.csv('data.csv', d3.autoType).then(data => {
+  let dataABC = data.filter(
+    d => d.country == 'Argentina' || d.country == 'Chile' || d.country == 'Brazil',
+  )
+
   let chart = Plot.plot({
-    height:500,
-    width:400,
-    marginLeft:60,
-    marginBottom:50,
-    line:true,
-    color: {
-      legend: true
-    },
     marks: [
-      Plot.areaY(data, {
-        x: "year", 
-        y: "pop", 
-        fill: "country"
-      })
+      Plot.areaY(dataABC, {
+        x: 'year',
+        y: 'pop',
+        // https://observablehq.com/@ee2dev/sorting-with-plot-a-collection-of-plot-examples
+        sort: d => -d.pop, // orden descendente
+        fill: 'country',
+      }),
     ],
-    x:{
-      domain:[d3.min(data, (d) => d.year)-1,d3.max(data, (d) => d.year)+1],
-      ticks:11,
-      tickRotate:-90,
+    x: {
+      tickFormat: 'd',
     },
-    y:{
-      ticks:7,
-      grid:true,
+    y: {
+      tickFormat: d3.format(',.0f'),
+      grid: true,
     },
-  });
-  d3.select("#chart").append(() => chart);
-};
-
+    marginLeft: 70,
+    line: true,
+    color: {
+      legend: true,
+    },
+  })
+  d3.select('#chart').append(() => chart)
+})
