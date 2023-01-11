@@ -22,46 +22,152 @@
           <br />
           <p class="label">VISUALIZACIÓN DE DATOS | LTD - LED - UTDT</p>
 
-          <h2>Tipos de datos, marcas y canales de codificación visual</h2>
+          <h2 id="titulo">Tipos de datos, marcas y canales de codificación visual <small><a href="#traduccion">↓</a></small></h2>
 
           <p>
-            Una visualización representa datos mediante una colección de marcas gráficas, como
+            Una visualización representa datos mediante un conjunto de <em>marcas gráficas</em>, como
             barras, líneas y símbolos de puntos. Los atributos de una marca, como su posición,
-            forma, tamaño o color, sirven como canales en los que podemos codificar valores de datos
-            subyacentes.
+            forma, tamaño o color, sirven como <em>canales</em> en los que podemos codificar valores de los datos.
           </p>
           <img src="imgs/canvas.png" alt="" />
           <p>
-            Con un marco básico de tipos de datos, marcas y canales de codificación, podemos crear
-            de manera concisa una amplia variedad de visualizaciones. En este cuaderno, exploramos
-            cada uno de estos elementos y mostramos cómo usarlos para crear gráficos estadísticos
-            personalizados.
+            Con un conjunto básico de <em>tipos de datos</em>, <em>marcas</em> y <em>canales de codificación</em>, podemos crear una amplia variedad de visualizaciones. En este apunte, exploramos
+            cada uno de estos elementos y mostramos cómo usarlos para crear gráficos estadísticos personalizados.
           </p>
 
           <h4>Datos de desarrollo mundial</h4>
           <p>
-            Visualizaremos datos globales de salud y población para países del mundo, registradas
-            durante los años 1955 a 2005. Los datos fueron recopilados por la Fundación Gapminder y
-            compartidos en la popular charla TED de Hans Rosling. (Si no has visto la charla, ¡te
-            animamos a que la veas!)
+            Visualizaremos datos globales de salud y población, registrados
+            entre los años 1955 y 2005. Los datos fueron recopilados por la Fundación Gapminder y
+            compartidos en la <a href="https://www.youtube.com/watch?v=hVimVzgtD6w">charla TED de Hans Rosling</a>.
             <br /><br />
-            Primero, carguemos el conjunto de datos
-            <a href="./data/data.csv">data.csv</a> con d3. El método <code>d3.csv</code> de d3 lo
-            transformará en una lista de objetos. El segundo parámetro (la función
-            <code>d3.autoType</code>) convertirá automáticamente los valores del conjunto de datos
-            al tipo correcto.
+            Cada una de las visualizaciones del apunte están embebidas, en esta página, a través de un <code>iframe</code> y se encuentran en un directorio independiente del <a href="https://github.com/visualizacion-de-datos-utdt/vd_apuntes_marcas_canales">repositorio</a>. Hay más de 30 y la intención es que sirvan como bases para la creación de nuevas visualizaciones.
+          </p>
+          <p>Por ejemplo, la primera visualización <a href="https://github.com/visualizacion-de-datos-utdt/vd_apuntes_marcas_canales/tree/main/chart_01_x">chart_01_x</a> tiene la siguiente estructura de archivos (que se repite en los otros ejemplos):</p>
+          <img src="./imgs/estructura_ejemplos.png" alt="" width="250">
+          <br><br>
+          <p>En primer término, el archivo <b>index.html</b> que leerá nuestro navegador y hará las llamadas a los códigos js necesarios para nuestras visualizaciones. Estos archivos son:
+            <ul>
+              <li><b>Plot.js</b> es una biblioteca gratuita y de código abierto que, junto con d3 (la otra biblioteca llamada desde el HTML), nos permitirá producir, a partir de datos, visualizaciones dinámicas e interactivas en navegadores web. Ambas hacen uso de tecnologías como SVG, HTML5, y CSS.</li>
+              <li><b>script.js</b> donde se aloja nuestro código</li>
+            </ul>
+
+             <p>Y por último tenemos nuestro archivo de datos <b>data2000.csv</b> en este caso en formato <em>csv</em>.</p>
+
+          
+
+<p>
+            En <b>script.js</b> programamos nuestra visualización. Lo primero que realizamos es la carga de datos <b>data.csv</b> con d3. El método <code>d3.csv</code> de d3 lo
+            transforma el texto plano del csv en una lista de objetos javascript. El segundo parámetro (la función
+            <code>d3.autoType</code>) convertirá los tipos de datos automáticamente al tipo correcto.
           </p>
           <pre><code class="language-js">
-  d3.csv("ruta_al_archivo/data.csv", d3.autoType).then((data) => {
-    console.table(data);
+  d3.csv("./data2000.csv", d3.autoType).then((data) => {
+    console.log(data);
   });
           </code></pre>
           <p>
-            El tamaño de los datos es de 693 filas por 6 columnas. Veamos el contenido de las
+            El tamaño de este conjunto de datos es de 63 filas por 6 columnas. Veamos el contenido de las
             primeras 10 filas:
           </p>
+                    <!-- Tabla 2000 -->
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>year</th>
+                          <th>country</th>
+                          <th>cluster</th>
+                          <th>pop</th>
+                          <th>life_expect</th>
+                          <th>fertility</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Afghanistan"</td>
+                          <td>A</td>
+                          <td>23898198</td>
+                          <td>42.129</td>
+                          <td>7.4792</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Argentina"</td>
+                          <td>D</td>
+                          <td>37497728</td>
+                          <td>74.34</td>
+                          <td>2.35</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Aruba"</td>
+                          <td>D</td>
+                          <td>69539</td>
+                          <td>73.451</td>
+                          <td>2.124</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Australia"</td>
+                          <td>E</td>
+                          <td>19164620</td>
+                          <td>80.37</td>
+                          <td>1.756</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Austria"</td>
+                          <td>B</td>
+                          <td>8113413</td>
+                          <td>78.98</td>
+                          <td>1.382</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Bahamas"</td>
+                          <td>D</td>
+                          <td>290075</td>
+                          <td>71.068</td>
+                          <td>2.1111</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Bangladesh"</td>
+                          <td>A</td>
+                          <td>130406594</td>
+                          <td>62.013</td>
+                          <td>3.224</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Barbados"</td>
+                          <td>D</td>
+                          <td>273483</td>
+                          <td>75.97</td>
+                          <td>1.5</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Belgium"</td>
+                          <td>B</td>
+                          <td>10263618</td>
+                          <td>78.32</td>
+                          <td>1.638</td>
+                        </tr>
+                        <tr>
+                          <td>2000</td>
+                          <td>"Bolivia"</td>
+                          <td>D</td>
+                          <td>8152620</td>
+                          <td>63.883</td>
+                          <td>3.9585</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <br /><br />
 
-          <table class="table">
+          <!-- <table class="table">
             <thead>
               <tr>
                 <th>year</th>
@@ -155,114 +261,17 @@
               </tr>
             </tbody>
           </table>
-          <br /><br />
+          <br /><br /> -->
           <p>
-            Para cada país (<code>country</code>) y año (<code>year</code>) (en intervalos de 5)
-            tenemos medidas de fertilidad en términos del número de hijos por mujer
+            Para cada país (<code>country</code>) y año (<code>year</code>) tenemos tasas de fertilidad en términos del número de hijos por mujer
             (<code>fertility</code>), esperanza de vida en años ( <code>life_expect</code> ) y
-            población total (<code>pop</code>). <br /><br />
-            También vemos un campo de <code>cluster</code> con un código entero. ¿Qué podría
-            representar esto? ¡Intentaremos resolver este misterio mientras visualizamos los datos!
+            población total (<code>pop</code>). 
             <br /><br />
-            También vamos a crear una matriz de datos más pequeña, filtrada a valores solo para el
-            año 2000 <a href="./data/data2000.csv">data2000.csv</a>
+            También vemos el campo <code>cluster</code> con una letra que representa representa la pertenencia del país a una región determinada.
+            <br /><br />
+            En otros ejemplos, utilizaremos el conjunto de datos completo, que tiene 693 registros y que se llama <a href="./data/data.csv">data.csv</a>. 
           </p>
-          <!-- Tabla 2000 -->
-          <table class="table">
-            <thead>
-              <tr>
-                <th>year</th>
-                <th>country</th>
-                <th>cluster</th>
-                <th>pop</th>
-                <th>life_expect</th>
-                <th>fertility</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>2000</td>
-                <td>"Afghanistan"</td>
-                <td>A</td>
-                <td>23898198</td>
-                <td>42.129</td>
-                <td>7.4792</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Argentina"</td>
-                <td>D</td>
-                <td>37497728</td>
-                <td>74.34</td>
-                <td>2.35</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Aruba"</td>
-                <td>D</td>
-                <td>69539</td>
-                <td>73.451</td>
-                <td>2.124</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Australia"</td>
-                <td>E</td>
-                <td>19164620</td>
-                <td>80.37</td>
-                <td>1.756</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Austria"</td>
-                <td>B</td>
-                <td>8113413</td>
-                <td>78.98</td>
-                <td>1.382</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Bahamas"</td>
-                <td>D</td>
-                <td>290075</td>
-                <td>71.068</td>
-                <td>2.1111</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Bangladesh"</td>
-                <td>A</td>
-                <td>130406594</td>
-                <td>62.013</td>
-                <td>3.224</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Barbados"</td>
-                <td>D</td>
-                <td>273483</td>
-                <td>75.97</td>
-                <td>1.5</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Belgium"</td>
-                <td>B</td>
-                <td>10263618</td>
-                <td>78.32</td>
-                <td>1.638</td>
-              </tr>
-              <tr>
-                <td>2000</td>
-                <td>"Bolivia"</td>
-                <td>D</td>
-                <td>8152620</td>
-                <td>63.883</td>
-                <td>3.9585</td>
-              </tr>
-            </tbody>
-          </table>
-          <br /><br />
+
 
           <!-- Data types -->
           <h3>Tipos de datos</h3>
@@ -1440,14 +1449,17 @@ Hemos completado nuestro recorrido por los tipos de datos, los canales de codifi
 <p>El estudio sistemático de marcas, codificaciones visuales y tipos de datos de respaldo fue iniciado por <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques Bertin</a> en su obra de 1967 <em>Sémiologie Graphique (La semiología de los gráficos)</em>.
 </p>
 <hr>
-<p>
-  Traducción al castellano y migración a Plot.js del artículo:
-<br>
-  <a
-  href="https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum"
-  >Jeffrey Heer. <em>Data Types, Graphical Marks, and Visual Encoding Channels</em>, UW Interactive Data Lab</a>
-</p>
-<br><br>
+<div id="traduccion">
+
+  <p><a href="#titulo">↑ </a>
+    Traducción al castellano y migración a Plot.js del artículo:
+  <br>
+    <a
+    href="https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum"
+    >Jeffrey Heer. <em>Data Types, Graphical Marks, and Visual Encoding Channels</em>, UW Interactive Data Lab</a>
+  </p>
+  <br><br>
+</div>
           
 
           <!-- chart_14_area_mark_f -->
