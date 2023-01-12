@@ -1,11 +1,11 @@
-d3.csv("data2000.csv", d3.autoType).then((data) => {
+d3.csv('data2000.csv', d3.autoType).then(data => {
   let chart = Plot.plot({
     marks: [
       Plot.dot(data, {
-        x: "fertility",
-        y: "life_expect",
-        stroke: "cluster",
-        r: "pop",
+        x: 'fertility',
+        y: 'life_expect',
+        stroke: 'cluster',
+        r: 'pop',
       }),
     ],
     grid: true,
@@ -14,7 +14,7 @@ d3.csv("data2000.csv", d3.autoType).then((data) => {
     color: {
       legend: true,
     },
-  });
+  })
 
-  d3.select("#chart").append(() => chart);
-});
+  d3.select('#chart').append(() => chart)
+})

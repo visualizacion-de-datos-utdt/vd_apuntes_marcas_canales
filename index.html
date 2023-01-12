@@ -46,20 +46,19 @@
           <p>Por ejemplo, la primera visualización <a href="https://github.com/visualizacion-de-datos-utdt/vd_apuntes_marcas_canales/tree/main/chart_01_x">chart_01_x</a> tiene la siguiente estructura de archivos (que se repite en los otros ejemplos):</p>
           <img src="./imgs/estructura_ejemplos.png" alt="" width="250">
           <br><br>
-          <p>En primer término, el archivo <b>index.html</b> que leerá nuestro navegador y hará las llamadas a los códigos js necesarios para nuestras visualizaciones. Estos archivos son:
+          <p>En primer término está <b>index.html</b>. Es el archivo HTML que leerá nuestro navegador y hará las llamadas a los códigos js necesarios para nuestras visualizaciones. Estos archivos son:
             <ul>
-              <li><b>Plot.js</b> es una biblioteca gratuita y de código abierto que, junto con d3 (la otra biblioteca llamada desde el HTML), nos permitirá producir, a partir de datos, visualizaciones dinámicas e interactivas en navegadores web. Ambas hacen uso de tecnologías como SVG, HTML5, y CSS.</li>
+              <li><b>Plot.js</b> es una biblioteca gratuita y de código abierto que, junto con d3 (la segunda biblioteca llamada desde el HTML), nos permitirá producir, a partir de datos, visualizaciones dinámicas e interactivas en navegadores web. Ambas hacen uso de las tecnologías web HTML, CSS y SVG</li>
               <li><b>script.js</b> donde se aloja nuestro código</li>
             </ul>
 
-             <p>Y por último tenemos nuestro archivo de datos <b>data2000.csv</b> en este caso en formato <em>csv</em>.</p>
+             <p>Y por último se encuentra el archivo de datos <b>data2000.csv</b> en este caso en formato CSV.</p>
 
           
 
 <p>
-            En <b>script.js</b> programamos nuestra visualización. Lo primero que realizamos es la carga de datos <b>data.csv</b> con d3. El método <code>d3.csv</code> de d3 lo
-            transforma el texto plano del csv en una lista de objetos javascript. El segundo parámetro (la función
-            <code>d3.autoType</code>) convertirá los tipos de datos automáticamente al tipo correcto.
+            En <b>script.js</b> programamos nuestra visualización. Lo primero que realizamos es la carga de datos <b>data.csv</b> con d3. El método <code>d3.csv</code> de d3 realiza la carga del archivo y transforma el texto plano del csv en una lista de objetos JavaScript. El segundo parámetro (la función
+            <code>d3.autoType</code>) detecta automáticamente los tipos de datos comunes, como números, fechas y valores booleanos, y convierte los valores al tipo de JavaScript correspondiente.
           </p>
           <pre><code class="language-js">
   d3.csv("./data2000.csv", d3.autoType).then((data) => {
@@ -693,7 +692,7 @@
 
           <!-- chart_06_color_tooltip_b -->
           <p>
-            Mediante una función anónima de javascript podemos acceder a los distintos campos y
+            Mediante una función anónima de JavaScript podemos acceder a los distintos campos y
             concatenarlos para el <em>tooltip</em>. Por ejemplo, el nombre del país con la
             expectativa de vida y la fertilidad:
             <code
@@ -794,19 +793,15 @@
 </code></pre>
           <h3 id="faces">Faces</h3>
           <p>
-            La posición espacial es uno de los canales más poderosos y flexibles para la
-            codificación visual, pero ¿qué podemos hacer si ya tenemos campos asignados a los
-            canales x e y? Una técnica valiosa es crear una grilla de gráficos, que conste de
-            subgráficos que muestran un subconjunto de los datos. Es técnica más general para
-            presentar datos utilizando pequeños múltiplos de vistas (<em
+            Una variante del canal de posición (x e y) es la codificación por faces, es decir, una grilla de gráficos pequeños de posición compuestos por subconjuntos de los datos principales que permite la comparación entre ellos. La técnica la definió Edward Tufte como <em
               ><a href="https://en.wikipedia.org/wiki/Small_multiple" target="_blank"
                 >small multiples</a
               ></em
-            >, Tufte). <br /><br />
-            En Plot se lo denomina <code>facet</code>. Debemos indicar el conjunto de datos
-            (<code>data</code>), el campo categórico que definirá los subgráficos y se aplicará la
-            grilla y el eje (x o y). En este ejemplo mapeamos <code>cluster</code> sobre el eje x
-            generando una fila horizontal de gráficos:
+            >. <br /><br />
+
+            Siguiendo nuestro proyecto, sería interesante utilizar faces para comparar los distintos grupos (cluster) de países. En Plot a este canal se lo denomina <code>facet</code> y es un canal de la marca <code>dot</code>. Para crearlo debemos indicar el conjunto de datos
+  (<code>data</code>) y el campo categórico que definirá los subgráficos así como el eje de alineación (x o y). En este ejemplo mapeamos <code>cluster</code> sobre el eje x
+  generando una fila de gráficos (uno por cada cluster de países):
           </p>
 
           <!-- chart_07_facets_a -->
@@ -1471,7 +1466,7 @@ Hemos completado nuestro recorrido por los tipos de datos, los canales de codifi
         </div>
       </div>
     </div>
-    <!-- <script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js"></script> -->
+    <!-- <script type="text/JavaScript" src="https://pym.nprapps.org/pym.v1.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"></script>
     <script>
       hljs.highlightAll()
