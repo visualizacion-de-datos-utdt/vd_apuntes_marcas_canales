@@ -18,7 +18,7 @@ function createChart(data) {
       grid: true,
     },
     height: 400,
-    width: 1000,
+    width: 960,
     marginLeft: 100,
     marginBottom: 100,
   })

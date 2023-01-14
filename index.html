@@ -41,7 +41,7 @@
             entre los años 1955 y 2005. Los datos fueron recopilados por la Fundación Gapminder y
             compartidos en la <a href="https://www.youtube.com/watch?v=hVimVzgtD6w">charla TED de Hans Rosling</a>.
             <br /><br />
-            Cada una de las visualizaciones del apunte están embebidas, en esta página, a través de un <code>iframe</code> y se encuentran en un directorio independiente del <a href="https://github.com/visualizacion-de-datos-utdt/vd_apuntes_marcas_canales">repositorio</a>. Hay más de 30 y la intención es que sirvan como bases para la creación de nuevas visualizaciones.
+            Cada una de las visualizaciones del apunte están embebidas, en esta página, a través de una etiqueta <code>iframe</code> y se encuentran en un directorio independiente del <a href="https://github.com/visualizacion-de-datos-utdt/vd_apuntes_marcas_canales">repositorio</a>. Hay más de 30 y la intención es que sirvan como bases para la creación de nuevas visualizaciones.
           </p>
           <p>Por ejemplo, la primera visualización <a href="https://github.com/visualizacion-de-datos-utdt/vd_apuntes_marcas_canales/tree/main/chart_01_x">chart_01_x</a> tiene la siguiente estructura de archivos (que se repite en los otros ejemplos):</p>
           <img src="./imgs/estructura_ejemplos.png" alt="" width="250">
@@ -289,11 +289,8 @@
           </p>
           <h5>Categóricos</h5>
           <p>
-            Los datos <b>categóricos</b>, también llamados datos
-            <b>nominales</b> solo pueden adoptar un grupo específico de valores que representan un conjunto de nombres posibles. Con datos
-            categóricos podemos comparar la igualdad de valores: ¿el valor A es igual o diferente al
-            valor B? (A == B), podemos declarar "A es igual a B" o "A no es igual a B". En los datos
-            de ejemplo, el campo <b>country</b> es nominal. Al visualizar datos nominales,
+            Los datos <b>categóricos</b>, también llamados <b>nominales</b> solo pueden adoptar un grupo limitado de valores. Con este tipo de datos podemos comparar la igualdad de valores: ¿el valor A es igual o diferente al
+            valor B? (A == B). Podemos decir si "A es igual a B" o "A no es igual a B". En los datos de ejemplo, el campo <b>country</b> es nominal. Al visualizar datos nominales,
 
             debemos percibir fácilmente si los valores son iguales o diferentes: la posición, el
             tono del color (azul, rojo, verde, etc.) y la elección de distintas formas geométricas
@@ -304,29 +301,27 @@
 
           <h5>Ordinales</h5>
           <p>
-            Los datos <b>ordinales</b> son datos categóricos que tienen un orden
+            Los <b>ordinales</b> son datos categóricos que tienen un orden
             específico. En este tipo de datos podemos comparar el orden de los valores: ¿el valor A
-            viene antes o después del valor B? (A < B), podemos preguntar si "A es menor que B" o "A
-            es mayor que B". En nuestro ejemplo, podemos tratar el campo <b>year</b> como
-            ordinal. Al visualizar datos ordinales, debemos percibir una sensación de orden. Son apropiados la posición, el tamaño o el valor del color (luminosidad), mientras que el tono
-            del color (posición en el espectro), que no está ordenado perceptivamente, es menos adecuado.
+            viene antes o después del valor B? (A < B) y podemos preguntar si "A es menor que B" o "A
+            es mayor que B". En nuestro ejemplo, tratamos al campo <b>year</b> como
+            ordinal. Al visualizar datos ordinales, debemos percibir una sensación de orden. La posición, el tamaño o el valor del color (luminosidad) son apropiados. Mientras que el tono
+            del color (posición en el espectro) es menos adecuado porque no está ordenado perceptivamente.
           </p>
 
           <h5>Cuantitativos</h5>
           <p>
             Con datos <b>cuantitativos</b> podemos medir diferencias numéricas
-            entre valores. Existen múltiples subtipos de datos cuantitativos: <br /><br />
-            Para datos de <b>intervalo</b> podemos medir la distancia
-            entre puntos: ¿cuál es la distancia del valor A al valor B? (A - B), podemos
-            enunciar "A está a 12 unidades de distancia de B". <br /><br />
-            Para los datos de <b>relación</b>, el punto cero es significativo,
-            por lo que también podemos medir proporciones o factores de escala: ¿qué proporción hay
-            entre el valor A y el valor B? (A / B), podemos decir "A es el 10% de B" o "B es 7 veces
-            más grande que A". <br /><br />
-            En el conjunto de datos de ejemplo, el campo <code>year</code> es un intervalo
-            cuantitativo (el valor del año "cero" es subjetivo), mientras que
-            <code>fertility</code> y <code>life_expect</code> son campos de relación cuantitativa
-            (el cero es significativo para calcular proporciones). <br /><br />
+            entre valores. Existen múltiples subtipos de datos cuantitativos: </p>
+            <ul>
+              <li><b>Intervalo</b>: podemos medir la distancia
+                entre puntos: ¿cuál es la distancia del valor A al valor B? (A - B) o decir "A está a 12 unidades de distancia de B".</li>
+              <li><b>Relación</b>: el cero es significativo por lo que podemos medir proporciones: ¿qué realción hay
+                entre el valor A y el valor B? (A / B) o decir "A es el 10% de B" o "B es 7 veces más grande que A".</li>
+            </ul>
+             <p>
+            En el conjunto de datos de ejemplo, el campo <b>year</b> es un <b>intervalo</b> (el valor del año "cero" es subjetivo), mientras que
+            <b>fertility</b> y <b>life_expect</b> son campos de tipo <b>relación</b> (el cero es significativo para calcular proporciones). <br /><br />
             Los valores cuantitativos se pueden visualizar mediante posición, tamaño o color (valor
             u opacidad), entre otros canales. Un eje con una línea de base cero es esencial para las
             comparaciones proporcionales de valores de relación, pero se puede omitir para las
@@ -873,7 +868,7 @@ Plot.plot({
             <li><code>cell()</code> Celdas: rectángulos rellenos, útiles para mapas de calor.</li>
             <li><code>text()</code> Puntos (coordenadas x, y) representados por texto.</li>
             <li>
-              <code>tick()</code> Líneas horizontales o verticales en donde el eje de la posición es
+              <code>tick()</code> Líneas horizontales o verticales en donde el eje de la posición es  
               cuantitativo y el otro eje es categórico.
             </li>
 
@@ -1447,12 +1442,10 @@ Hemos completado nuestro recorrido por los tipos de datos, los canales de codifi
 <hr>
 <div id="traduccion">
 
-  <p><a href="#titulo">↑ </a>
-    Traducción al castellano y migración a Plot.js del artículo:
-  <br>
-    <a
+  <p><a href="#titulo">↑ </a> <a
     href="https://observablehq.com/@uwdata/data-types-graphical-marks-and-visual-encoding-channels?collection=@uwdata/visualization-curriculum"
-    >Jeffrey Heer. <em>Data Types, Graphical Marks, and Visual Encoding Channels</em>, UW Interactive Data Lab</a>
+    >Jeffrey Heer. <em>Data Types, Graphical Marks, and Visual Encoding Channels</em>, UW Interactive Data Lab</a>.
+    Traducción al castellano y adaptación a Plot.js por Carlos Araujo, Juana Copello y Julieta Romero.
   </p>
   <br><br>
 </div>
