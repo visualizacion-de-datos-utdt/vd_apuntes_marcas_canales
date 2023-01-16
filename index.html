@@ -973,36 +973,34 @@ Plot.plot({
           <h4>Barras</h4>
           <!-- chart_12_bar_mark_a -->
           <p>
-            El tipo de marca de barras dibuja rectángulos donde sus longitudes en un eje representan un campo cuantitativo y en el eje opuesto se despliega un campo categórico. 
-            
-            con una posición, un ancho y un alto.
+            El tipo de marca de barras dibuja rectángulos donde sus longitudes representan un campo cuantitativo. Y en el eje opuesto se despliega un campo categórico u ordinal. 
             <br /><br />
-            El siguiente gráfico es de barras verticales (<b>barY</b>) para visualizar las poblaciones de los países. Por lo tanto, el dato cuantitativo es <b>pop</b> en el eje <b>y</b> y en el eje <b>x</b> definimos el dato categórico <b>country</b>. Con la función <code>sort()</code> de d3
-            ordenamos el dominio de <b>x</b> de manera descendente según la población para facilitar la comparación.
+            El siguiente gráfico es de barras horizontales (<b>barX</b>) para visualizar las poblaciones de los países. Por lo tanto, el dato cuantitativo es <b>pop</b> en el eje <b>x</b> y en el eje <b>y</b> definimos el dato categórico <b>country</b>. Con la función <b>sort</b> de d3
+            ordenamos el dominio de <b>y</b> de manera descendente según la población para facilitar la comparación:
+            <br>
+            <code class="language-js">d3.sort(data, (a, b) => d3.descending(a.pop, b.pop)).map(d => d.country)</code>
+            <br>
+            Hay dos razones para preferir un gráfico de barras horizontales sobre uno de barras verticales. La primera es que las barras dispuestas una encima de la otra se leen como una lista acentuando visualmente el orden de los valores. La segunda es que usando el formato horizontal se facilita la puesta tipográfica de los nombres de las categorías (en nuestro caso los países). Como regla, si la escala incluye más de 6 categorías, es preferible utilizar un gráfico de barras horizontales a uno de barras verticales.
           </p>
           <iframe src="chart_12_bar_mark_a/index.html"></iframe>
           <pre><code class="language-js">
   /* chart_12_bar_mark_a */
   Plot.plot({
     marks: [
-      Plot.barY(data, {
-        x: 'country',
-        y: 'pop',
+      Plot.barX(data, {
+        x: 'pop',
+        y: 'country',
       }),
     ],
-    x: {
-      domain: d3.sort(data, (a, b) => d3.descending(a.pop, b.pop)).map(d => d.country),
-      tickRotate: -45,
-    },
     y: {
+      domain: d3.sort(data, (a, b) => d3.descending(a.pop, b.pop)).map(d => d.country),
+    },
+    x: {
       grid: true,
     },
-    height: 400,
-    width: 1000,
+    height: 1000,
     marginLeft: 100,
-    marginBottom: 100,
   })
-            
             </code></pre>
           <!-- chart_12_bar_mark_group -->
           <p>
