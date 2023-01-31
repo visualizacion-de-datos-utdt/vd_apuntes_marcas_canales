@@ -674,15 +674,15 @@
   });
 
 </code></pre>
-          <h3 id="faces">Faces</h3>
+          <h3 id="faces">Facetas</h3>
           <p>
-            Una variante del canal de posición (x e y) es la codificación por faces, es decir, una grilla de gráficos pequeños de posición compuestos por subconjuntos de los datos principales que permite la comparación entre ellos. La técnica la definió Edward Tufte como <em
+            Una variante del canal de posición (x e y) es la codificación por facetas, es decir, una grilla de pequeños gráficos de posición compuestos por agrupaciones de los datos principales  a partir de una misma propiedad, que permite la comparación entre ellos. La técnica la definió Edward Tufte como <em
               ><a href="https://en.wikipedia.org/wiki/Small_multiple" target="_blank"
                 >small multiples</a
               ></em
             >. <br /><br />
 
-            Siguiendo nuestro proyecto, sería interesante utilizar faces para comparar los distintos grupos (cluster) de países. En Plot a este canal se lo denomina <code>facet</code> y es un canal de la marca <code>dot</code>. Para crearlo debemos indicar el conjunto de datos
+            Siguiendo nuestro proyecto, sería interesante utilizar facetas para comparar los distintos grupos <b>(cluster)</b> de países. En Plot a este canal se lo denomina <code>facet</code> y es un canal de la marca <code>dot</code>. Para crearlo debemos indicar el conjunto de datos
   (<code>data</code>) y el campo categórico que definirá los subgráficos así como el eje de alineación (x o y). En este ejemplo mapeamos <code>cluster</code> sobre el eje x
   generando una fila de gráficos (uno por cada cluster de países):
           </p>
@@ -719,7 +719,7 @@
           <!-- chart_07_facets_b -->
           <p>
             El gráfico anterior queda desproporcionado con las medidas predeterminadas, lo que
-            dificulta la comparación de las subgráficos entre sí. Podemos asignar nuevos valores a
+            dificulta la comparación de los "subgráficos" entre sí. Podemos asignar nuevos valores a
             las propiedades de ancho y alto para crear un conjunto más pequeño de múltiplos. Y
             ajustar el rango del radio del círculo. Además, dado que los encabezados de los
             subgráficos etiquetan los valores de cluster, podemos eliminar la leyenda de color.
@@ -755,6 +755,9 @@ Plot.plot({
           <hr />
           <h2 id="marcas">Marcas</h2>
           <p>
+            Además de codificar canales, podemos elegir distintos tipos de marcas gráficas de
+            acuerdo a lo que necesitemos comunicar con los datos. Una visualización puede combinar múltiples marcas. En <b>Plot.js</b> las marcas son métodos que se expresan: <code>Plot.nombre_de_la_marca()</code>.
+
             En la exploración de canales de codificación utilizamos exclusivamente puntos (<code>Plot.dot()</code>) para visualizar datos. Sin embargo, la marca de puntos es solo una de las muchas formas geométricas que se pueden usar para representar
             datos visualmente. <b>Plot.js</b> dispone actualmente de 19 clases distintas de marcas. En este apunte veremos algunas de ellas:
           </p>
@@ -790,8 +793,6 @@ Plot.plot({
           <!-- chart_10_dot_mark -->
           <h4>Punto</h4>
           <p>
-            Además de codificar canales, podemos elegir distintos tipos de marcas gráficas de
-            acuerdo a lo que necesitemos comunicar con los datos. Una visualización puede combinar múltiples marcas. En <b>Plot.js</b> las marcas son métodos que se expresan: <code>Plot.nombre_de_la_marca()</code>. <br /><br />
             La marca de punto <b>dot</b>
             representa predeterminadamente los datos como círculos, frecuentemente posicionados en dimensiones
             cuantitativas x e y, como en un gráfico de dispersión. Por ejemplo, el siguiente
@@ -851,7 +852,7 @@ Plot.plot({
           <h4>Tilde</h4>
           <p>
             Las tildes (<b>ticks</b>) son líneas horizontales o verticales. Una <b>tickY</b> ↔︎ tiene un valor y,
-            mientras que un <b>tickX</b> ↕︎ tiene un valor x. Los ticks se usan habitualmente para mostrar
+            mientras que un <b>tickX</b> ↕︎ tiene un valor x. Los ticks se suelen usar para mostrar
             distribuciones unidimensionales, como en el gráfico de tipo "código de barras" que a continuación muestra la densidad de fertilidad en cada <em>cluster</em> de países.
           </p>
           <iframe src="chart_11_tick_mark/index.html"></iframe>
@@ -876,14 +877,14 @@ Plot.plot({
           <h4>Barras</h4>
           <!-- chart_12_bar_mark_a -->
           <p>
-            El tipo de marca de barras dibuja rectángulos donde sus longitudes representan un campo cuantitativo. Y en el eje opuesto se despliega un campo categórico u ordinal. 
+            El tipo de marca de barras dibuja rectángulos, cuyas longitudes representan un campo cuantitativo. Y en el eje opuesto se despliega un campo categórico u ordinal. 
             <br /><br />
             El siguiente gráfico es de barras horizontales (<b>barX</b>) para visualizar las poblaciones de los países. Por lo tanto, el dato cuantitativo es <b>pop</b> en el eje <b>x</b> y en el eje <b>y</b> definimos el dato categórico <b>country</b>. Con la función <b>sort</b> de d3
-            ordenamos el dominio de <b>y</b> de manera descendente según la población para facilitar la comparación:
+            ordenamos el dominio de <b>y</b> de manera descendente según la población para facilitar la comparación entre países:
             <br>
             <code class="language-js">d3.sort(data, (a, b) => d3.descending(a.pop, b.pop)).map(d => d.country)</code>
             <br>
-            Hay dos razones para preferir un gráfico de barras horizontales sobre uno de barras verticales. La primera es que las barras dispuestas una encima de la otra se leen como una lista acentuando visualmente el orden de los valores. La segunda es que usando el formato horizontal se facilita la puesta tipográfica de los nombres de las categorías (en nuestro caso los países). Como regla, si la escala incluye más de 6 categorías, es preferible utilizar un gráfico de barras horizontales a uno de barras verticales.
+            Hay dos razones para preferir un gráfico de barras horizontales sobre uno de barras verticales. La primera es que las barras dispuestas una encima de la otra se leen como una lista, acentuando visualmente el orden de los valores. La segunda es que usando el formato horizontal se facilita la puesta tipográfica de los nombres de las categorías (en nuestro caso los países). Como regla, si la escala incluye más de 6 categorías, es preferible utilizar un gráfico de barras horizontales a uno de barras verticales.
           </p>
           <iframe src="chart_12_bar_mark_a/index.html"></iframe>
           <pre><code class="language-js">
@@ -912,8 +913,8 @@ Plot.plot({
             barra. Sin embargo, la marca de barra también permite especificar puntos de inicio y
             final para visualizar rangos. <br /><br />
             El gráfico siguiente utiliza los canales <b>x1</b> (punto de partida) y <b>x2</b> (punto
-            final) para mostrar el rango de fertilidad dentro de cada grupo regional (cluster).
-            Utilizamos las funciones de agregación mínimo y máximo para determinar los extremos del
+            final) para mostrar el rango de fertilidad dentro de cada grupo regional <b>(cluster)</b>.
+            Utilizamos las funciones de mínimo y máximo para determinar los extremos del
             rango. Previamente agrupamos por cluster con la función de transformación
             <code>groupY</code>.
           </p>
@@ -948,7 +949,7 @@ Plot.plot({
             usando el canal de color. También desactivamos la leyenda (que sería muy larga con
             colores para todos los países). En su lugar usamos a la propiedad
             <code>title</code> para generar <em>tooltips</em> con el nombre
-            del país y la población, que se activan por <em>hover</em> del usuario.
+            del país y la población, que se activan con el <em>hover</em> del usuario.
           </p>
 
           <!-- chart_12_bar_mark_stacked -->
@@ -974,7 +975,7 @@ Plot.plot({
           <p>
             La marca de línea (<b>line</b>) conecta puntos con una línea. A través de la
             pendiente de una línea se puede comunicar, por ejemplo, la tasa de cambio de una
-            variable. Por ejemplo, con esta marca podemos visualizar claramente como creció la expectativa de vida en Argentina a través de los años. Usamos el archivo <b>data.csv</b> con los datos completos:
+            variable. Por ejemplo, con esta marca podemos visualizar claramente como creció la expectativa de vida en Argentina a través de los años. Estamos usando el archivo <b>data.csv</b> con los datos completos:
           </p>
             <br /><br />
 
@@ -1023,12 +1024,12 @@ Plot.plot({
             </code></pre>
           <p>
             Cambiemos algunos de los parámetros de marca predeterminados para personalizar el
-            gráfico. Podemos configurar el ancho del trazo para determinar el grosor de las líneas y
-            la opacidad para agregar algo de transparencia. De forma predeterminada, la marca de
+            gráfico. Podemos configurar el <b>ancho del trazo</b> para determinar el grosor de las líneas y
+            la <b>opacidad</b> para agregar algo de transparencia. De forma predeterminada, la marca de
             línea utiliza segmentos de línea recta para conectar puntos de datos.
             <br /><br />
             Es posible suavizar las líneas ajustando la
-            interpolación que conecta a los puntos de datos. Asignamos a la propiedad <b>curve</b> el valor <b>'natural'</b> para proporcionar líneas suaves que garanticen que no generarán valores mínimos o máximos falsos como resultado de la interpolación.
+            interpolación que conecta a los puntos de datos. Asignamos a la propiedad <b>curve</b> el valor <b>'natural'</b> para proporcionar líneas suaves que no generarán valores mínimos o máximos falsos como resultado de la interpolación.
           </p>
           <!-- chart_13_line_mark_b -->
           <iframe src="chart_13_line_mark_b/index.html"></iframe>
@@ -1205,7 +1206,7 @@ Plot.plot({
             >
             <br />
             <br />
-            y luego los graficamos usando una marca de área y un canal de codificación de color para
+            y luego los graficamos usando una marca de área y un canal de color para
             apilarlos por país.
           </p>
 
@@ -1278,7 +1279,7 @@ Plot.plot({
 
 
           <!-- chart_14_area_mark_e -->
-          <p>La marca de área también admite líneas inferiores basadas en datos. En este ejemplo usamos los canales <b>y1</b> e <b>y2</b> para codificar los mínimos y máximos de fertilidad de cada año. Previamente necesitamos hacer una adaptación de nuestros datos:</p>
+          <p>La marca de área también admite líneas inferiores basadas en datos. En este ejemplo usamos los canales <b>y1</b> e <b>y2</b> para codificar los mínimos y máximos de fertilidad de cada año. Para eso, necesitamos adaptar nuestros datos:</p>
 
 <pre><code class="language-js">
   let dataABC = data.filter(
@@ -1324,11 +1325,10 @@ Plot.plot({
   <hr>
   <h3>Extra: interacción</h3>
           <p>
-            En módulos posteriores, estudiaremos técnicas de interacción para la exploración de
-            datos. Acá hay un adelanto: vinculamos un <em>slider</em> al campo
+            Posteriormente vamos a estudiar <b>técnicas de interacción</b> para la exploración de
+            datos. Acá hacemos un adelanto: vinculamos un <em>slider</em> al campo
             <code>year</code> para permitirle al usuario filtrar los datos por año. No nos preocupemos
-            si el código del proyecto <code>chart_08_slider</code> es un poco confuso en este punto,
-            ya que más adelante cubriremos la interacción en detalle. Arrastremos el slider hacia
+            si el código del proyecto <code>chart_08_slider</code> es un poco confuso en este punto; más adelante vamos a cubrir la interacción en detalle. Arrastremos el <em>slider</em> hacia
             adelante y hacia atrás para ver cómo cambian los valores de los datos en el tiempo.
           </p>
           <!-- chart_08_slider -->
@@ -1336,7 +1336,7 @@ Plot.plot({
 <hr>
   <h3>Resumen</h3>
   <p>
-Hemos completado nuestro recorrido por los tipos de datos, los canales de codificación y las marcas gráficas. Para obtener una referencia completa (incluidas las funciones que hemos omitido aquí) consultar la documentación de <a href="https://observablehq.com/@observablehq/plot?collection=@observablehq/plot">Plot.js</a> .
+Ya completamos nuestro recorrido por los tipos de datos, los canales de codificación y las marcas gráficas. Para obtener una referencia completa (incluidas las funciones que hemos omitido aquí) consultar la documentación de <a href="https://observablehq.com/@observablehq/plot?collection=@observablehq/plot">Plot.js</a> .
 </p>
 <p>El estudio sistemático de marcas, codificaciones visuales y tipos de datos de respaldo fue iniciado por <a href="https://en.wikipedia.org/wiki/Jacques_Bertin">Jacques Bertin</a> en su obra de 1967 <em>Sémiologie Graphique (La semiología de los gráficos)</em>.
 </p>
