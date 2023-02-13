@@ -728,6 +728,17 @@
           <pre><code class="language-js">
 /* chart_07_facets_b */
 Plot.plot({
+  marks: [
+    Plot.dot(data, {
+      x: "fertility",
+      y: "life_expect",
+      fill: "cluster",
+      fillOpacity: 0.6,
+      r: "pop",
+      title: "country",
+    }),
+    Plot.frame(),
+  ],
   grid: true,
   nice: true,
   zero: true,
@@ -738,16 +749,6 @@ Plot.plot({
     data: data,
     x: "cluster",
   },
-  marks: [
-    Plot.dot(data, {
-      x: "fertility",
-      y: "life_expect",
-      fill: "cluster",
-      fillOpacity: 0.6,
-      r: "pop",
-      title: "country",
-    }),
-  ],
 });
 
 </code></pre>
@@ -1282,6 +1283,7 @@ Plot.plot({
           <p>La marca de área también admite líneas inferiores basadas en datos. En este ejemplo usamos los canales <b>y1</b> e <b>y2</b> para codificar los mínimos y máximos de fertilidad de cada año. Para eso, necesitamos adaptar nuestros datos:</p>
 
 <pre><code class="language-js">
+  /* chart_14_area_mark_d */
   let dataABC = data.filter(
     d => d.country === 'Argentina' 
          || d.country === 'Brasil' 
@@ -1302,6 +1304,7 @@ Plot.plot({
   <p>De esta manera el mínimo de la fertilidad está codificado en la línea inferior del área y el máximo en la superior. Además agregamos una marca de línea para mostrar la fertilidad promedio.</p>
           <iframe src="chart_14_area_mark_e/index.html"></iframe>
 <pre><code class="language-js">
+  /* chart_14_area_mark_e */
   Plot.plot({
     marks: [
       Plot.areaY(dataMinMax, {
@@ -1333,6 +1336,10 @@ Plot.plot({
           </p>
           <!-- chart_08_slider -->
           <iframe src="chart_08_slider/index.html"></iframe>
+  <pre><code class="language-js">
+  /* chart_08_slider */
+    </code></pre>
+          
 <hr>
   <h3>Resumen</h3>
   <p>
