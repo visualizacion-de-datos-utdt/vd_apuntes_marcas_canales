@@ -4,7 +4,7 @@ let valuesDomainX
 let valuesDomainY
 
 let selectElement = d3.select('#input')
-selectElement.on('change', event => {
+selectElement.on('input', event => {
   let yearSelected = event.target.value
   changeValueInput(yearSelected)
   createChart(yearSelected)
