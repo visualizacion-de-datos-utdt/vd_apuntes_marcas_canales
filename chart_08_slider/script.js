@@ -5,7 +5,9 @@ let valuesDomainY
 
 let selectElement = d3.select('#input')
 selectElement.on('input', event => {
-  let yearSelected = event.target.value
+  console.log(selectElement.property('value'))
+  // Opción 2: let yearSelected = event.target.value
+  let yearSelected = selectElement.property('value')
   changeValueInput(yearSelected)
   createChart(yearSelected)
 })
